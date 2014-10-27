@@ -1,0 +1,9 @@
+Package: collr2
+Type: Package
+Title: QCDH
+Version: 1.0
+Date: 2014-10-26
+Author: Kaiyin Zhong
+Maintainer: Kaiyin Zhong <kindlychung@gmail.com>
+Description: QCDH
+License: GPL
