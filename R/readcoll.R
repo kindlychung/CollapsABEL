@@ -1,6 +1,6 @@
 readcoll = function(hub, plinkOutExt = "assoc.linear") {
     hub$plinkOutExt = plinkOutExt
-    hub$outRdata = paste(.self$bedStem, ".RData", sep="")
+    hub$outRdata = paste(hub$bedStem, ".RData", sep="")
     hub$plinkOutFiles = sort(Sys.glob(paste(hub$shiftStemCommon, "*.", hub$plinkOutExt, sep="")))
     if(length(hub$plinkOutFiles) != length(hub$shiftFilesBed)) stop("Finish your analysis first!")
     firstPlinkOut = hub$plinkOutFiles[1]
