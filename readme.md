@@ -44,7 +44,7 @@
     install_bitbucket("kindlychung/manqq")
     install_github("kindlychung/gmailR")
     install_bitbucket("kindlychung/autoGmail")
-    install_bitbucket("kindlychung/collr")
+    install_bitbucket("kindlychung/collr2")
 
 # Changes
 

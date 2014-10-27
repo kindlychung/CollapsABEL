@@ -11,13 +11,13 @@ readcoll = function(hub, plinkOutExt = "assoc.linear") {
     # initialize some objects
     hub$minPvalsBonfer = 1
     hub$minPvals = 1
-	hub$pvals   = matrix(, .self$nsnp, 0)
-	hub$chr     = matrix(, .self$nsnp, 0)
-	hub$snp     = matrix(, .self$nsnp, 0)
-	hub$bp      = matrix(, .self$nsnp, 0)
-	hub$chr2    = matrix(, .self$nsnp, 0)
-	hub$snp2    = matrix(, .self$nsnp, 0)
-	hub$bp2     = matrix(, .self$nsnp, 0)
+	hub$pvals   = matrix(, hub$nsnp, 0)
+	hub$chr     = matrix(, hub$nsnp, 0)
+	hub$snp     = matrix(, hub$nsnp, 0)
+	hub$bp      = matrix(, hub$nsnp, 0)
+	hub$chr2    = matrix(, hub$nsnp, 0)
+	hub$snp2    = matrix(, hub$nsnp, 0)
+	hub$bp2     = matrix(, hub$nsnp, 0)
 
     for(i in 1:length(hub$plinkOutFiles)) {
         plinkOutFile = hub$plinkOutFiles[i]
