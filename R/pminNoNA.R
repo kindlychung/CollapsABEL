@@ -1,3 +1,3 @@
-pminNoNA = function() {
+pminNoNA = function(...) {
     pmin(..., na.rm = TRUE)
 }

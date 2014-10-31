@@ -4,7 +4,7 @@ readcoll = function(hub, plinkOutExt = "assoc.linear") {
     hub$plinkOutFiles = sort(Sys.glob(paste(hub$shiftStemCommon, "*.", hub$plinkOutExt, sep="")))
 
     if(length(hub$plinkOutFiles) != length(hub$shiftFilesBed)) {
-        stop("Finish your analysis first!")
+        stop("Analysis unfinished! (Or wrong plink output extension?)")
     }
 
     firstPlinkOut = hub$plinkOutFiles[1]

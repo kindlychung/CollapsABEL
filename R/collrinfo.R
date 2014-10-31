@@ -1,6 +1,8 @@
 collrinfo = function(wDir=".") {
     hub = new.env()
+    class(hub) = c(class(hub), "collrinfo")
     hub$wDir = wDir
+    hub$tmpdir = homeTmpDir()
     rootAllBedFiles = Sys.glob(file.path(wDir, "*.bed"))
     shiftIdx = grepl("_shift_", rootAllBedFiles)
     rootNonShiftBedFiles = rootAllBedFiles[!shiftIdx]
@@ -45,4 +47,9 @@ collrinfo = function(wDir=".") {
     hub$shiftStemCommon = sprintf("%s_shift_", hub$bedStem)
 
     hub
+}
+
+summary.collrinfo = function(hub) {
+    message("Main plink files:")
+    print(hub$mainPlinkFiles)
 }
