@@ -20,10 +20,8 @@
 ## In R:
 
     require(devtools)
-    install_bitbucket("kindlychung/txtutils2")
+    install_bitbucket("kindlychung/txtutils")
     install_bitbucket("kindlychung/manqq2")
-    install_github("kindlychung/gmailR")
-    install_bitbucket("kindlychung/autoGmail")
     install_bitbucket("kindlychung/collr2")
 
 # Changes
