@@ -22,7 +22,7 @@ bedcollinfo = function(hub, genbed=FALSE, nShiftMin = 1, nShiftMax = 5) {
 
         rmList = c(shift0FamFile, shift0FamFile, shift0BimFile, hub$shiftFilesBim, hub$shiftFilesFam)
         rmList = rmList[file.exists(rmList)]
-        file.remove(rmList)
+        if(length(rmList) > 0) file.remove(rmList)
 
         # Linking bim and fam files
         currentDir = getwd()

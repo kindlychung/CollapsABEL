@@ -656,7 +656,7 @@ plinkr = function(
 	paramNameWithValue[idxOdd] = paramName
 	paramNameWithValue[idxEven] = paramVector
 	
-	ret = system2('plink', paramNameWithValue, wait=wait, stdout=NULL, stderr=NULL)
+	ret = system2('plink', paramNameWithValue, wait=wait, stdout=stdout, stderr=stderr)
     if(ret != 0) {
         stop("PLINK failed.")
     }
