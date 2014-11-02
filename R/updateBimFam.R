@@ -12,7 +12,6 @@ updateBimFam = function(hub) {
     currentDir = getwd()
     tryCatch({
                 setwd(hub$wDir)
-                browser()
 
                 bedBase = basename(hub$bedPath)
                 famBase = basename(hub$famPath)
@@ -36,7 +35,6 @@ updateBimFam = function(hub) {
             }, 
             error = function(e) {
                 message("Error in updateBimFam!")
-                traceback()
                 return(invisible(FALSE))
             }, 
             finally = {
