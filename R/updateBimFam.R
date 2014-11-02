@@ -5,7 +5,7 @@ updateBimFam = function(hub) {
     shift0BimFile = paste(hub$bedStem, "_shift_0000.bim", sep="")
 
     rmList = c(shift0FamFile, shift0FamFile, shift0BimFile, hub$shiftFilesBim, hub$shiftFilesFam)
-    rmList = rmList(file.exists(rmList))
+    rmList = rmList[file.exists(rmList)]
     file.remove(rmList)
 
     # Linking bim and fam files
