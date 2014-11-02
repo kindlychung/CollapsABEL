@@ -5,7 +5,6 @@ crt1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, tra
     bedcollinfo(hubcollr, genbed = FALSE)
     taskinfo(hubcollr, taskName, plinkArgs, initGwasArgs, initGwas, traitType)
     hubtask = hubcollr[[taskName]]
-    hubtask$fullGwasOut = sprintf("%s.%s", hubtask$bedStem, hubtask$fullGwasOutExt) 
     taskBedsPlinkOut(hubcollr, taskName, hubtask$fullGwasOut, pFilter, 1, 10)
     taskAnalyze(hubcollr, taskName)
     readcoll.task(hubcollr, taskName)

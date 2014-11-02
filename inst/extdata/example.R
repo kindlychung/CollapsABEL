@@ -35,6 +35,7 @@ contrastPlot(hubcollr$test2)
 plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
 crt1("~/Desktop/mmp3", "test3", plinkArgs, initGwasArgs, TRUE, "con", 0.1)
+
 debug(crt1)
 debug(taskinfo)
 

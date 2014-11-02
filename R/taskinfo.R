@@ -25,6 +25,7 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
         if(traitType == "bin") hubtask$fullGwasOutExt = "assoc"
         else                   hubtask$fullGwasOutExt = "qassoc"
     }
+    hubtask$fullGwasOut = sprintf("%s.%s", hubtask$bedStem, hubtask$fullGwasOutExt) 
 
     if(initGwas) {
         tmplist = hubtask$initPlinkArgs
