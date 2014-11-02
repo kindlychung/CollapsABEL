@@ -625,12 +625,12 @@ plinkcollr = function(
 	# get list of collapsed bed files
 	plinkcollFileStems = paramList$plinkcollFileStems
 	if(is.null(plinkcollFileStems)) stop("You must give a vector of bed files to apply plink upon")
-	debugps("Recieved bed files:")
-	debugpo(plinkcollFileStems)
+	# debugps("Recieved bed files:")
+	# debugpo(plinkcollFileStems)
 	if(grepl("bed$", plinkcollFileStems[1], perl=TRUE)) {
-		debugps('Removing .bed extension...')
 		plinkcollFileStems = getstem(plinkcollFileStems)
-		debugpo(plinkcollFileStems)
+		# debugps('Removing .bed extension...')
+		# debugpo(plinkcollFileStems)
 	}
 
     paramList$plinkcollFileStems = NULL
@@ -658,19 +658,24 @@ plinkcollr = function(
 	paramNameThenValue = character(nParam * 2)
 	paramNameThenValue[idxOdd] = paramName
 	paramNameThenValue[idxEven] = paramVector
-	debugps("Recieved parameters: ")
-	debugpo(paramNameThenValue)
+	# debugps("Recieved parameters: ")
+	# debugpo(paramNameThenValue)
 	if("--out" %in% paramNameThenValue) stop("The 'out' option shouldn't be in thre batch mode")
 	if("--bfile" %in% paramNameThenValue) stop("The 'bfile' option shouldn't be in there batch mode")
 
 
+    nfiles = length(plinkcollFileStems)
+    nscanned = 0
 	for(bedFile in plinkcollFileStems) {
 		localParam = paramNameThenValue
 		localParam = c("--bfile", bedFile, "--out", bedFile, localParam)
-        ret = system2("plink", localParam, wait=wait, stdout=stdout, stderr=stderr)
+        ret = system2("plink", localParam, wait=wait, stdout=NULL, stderr=NULL)
         if(dbgtrigger()) cat("Return value from PLINK: ", ret, "\n")
         if(ret != 0) stop("PLINK failed.")
+        nscanned = nscanned + 1
+        cat(sprintf("\rScanning shifted bed files %d/%d ...", nscanned, nfiles))
 	}
+    cat("\n")
 }
 
 

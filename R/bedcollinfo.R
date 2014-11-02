@@ -10,26 +10,19 @@ bedcollinfo = function(hub, genbed=FALSE, nShiftMin = 1, nShiftMax = 5) {
     invisible(NULL)
 }
 
-summary.bedcollinfo = function(hub) {
-    n = length(hub$shiftFilesBed)
-    message("Shifted bed files: ")
-    if(n > 6) {
-        printhead = head(hub$shiftFilesBed, 3)
-        printtail = tail(hub$shiftFilesBed, 3)
-        printout = matrix(c(printhead, "⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮", printtail), ncol=1)
-        catmat(printout)
-    } else {
-        catmat(matrix(hub$shiftFilesBed, ncol=1))
-    }
-
-    tryCatch({
-        NextMethod()
-    }, warning = function(w) {
-    }, error = function(e) {
-    }, finally = {
-    })
-
-    invisible(NULL)
-}
+## summary.bedcollinfo = function(hub) {
+##     n = length(hub$shiftFilesBed)
+##     message("Shifted bed files: ")
+##     if(n > 6) {
+##         printhead = head(hub$shiftFilesBed, 3)
+##         printtail = tail(hub$shiftFilesBed, 3)
+##         printout = matrix(c(printhead, "⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮⋮", printtail), ncol=1)
+##         catmat(printout)
+##     } else {
+##         catmat(matrix(hub$shiftFilesBed, ncol=1))
+##     }
+##     NextMethod()
+##     invisible(NULL)
+## }
     
 

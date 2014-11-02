@@ -22,18 +22,21 @@ contrastPlot(hubcollr$test1)
 
 setwd("~/Desktop/mmp3")
 hubcollr = collrinfo()
-summary(hubcollr)
 # bedcollinfo(hubcollr, genbed = TRUE, nShiftMin = 1, nShiftMax = 5)
-bedcollinfo(hubcollr, genbed = FALSE, nShiftMin = 1, nShiftMax = 5)
+bedcollinfo(hubcollr, genbed = FALSE)
 plinkargs = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
-qcfilter = getPlinkParam(maf=.01, hwe=1e-4)
-taskinfo(hubcollr, "test2", plinkargs, qcfilter, TRUE)
-taskBedsPlinkOut(hubcollr, "test2", "collr_task_test2/mmp13.assoc.linear", .1, 1, 10)
+qcfilter = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
+taskinfo(hubcollr, "test2", plinkargs, qcfilter, TRUE, "bin")
+taskBedsPlinkOut(hubcollr, "test2", "collr_task_test2/mmp13.qassoc", .1, 1, 10)
 taskAnalyze(hubcollr, "test2")
 readcoll.task(hubcollr, "test2")
-basePlot(hubcollr$test2)
-minPlot(hubcollr$test2)
 contrastPlot(hubcollr$test2)
+
+plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
+initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
+crt1("~/Desktop/mmp3", "test3", plinkArgs, initGwasArgs, TRUE, "con", 0.1)
+debug(crt1)
+debug(taskinfo)
 
 
 hubcollr$test1$nsnp
