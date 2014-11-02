@@ -12,6 +12,7 @@ updateBimFam = function(hub) {
     currentDir = getwd()
     tryCatch({
                 setwd(hub$wDir)
+                browser()
 
                 bedBase = basename(hub$bedPath)
                 famBase = basename(hub$famPath)
