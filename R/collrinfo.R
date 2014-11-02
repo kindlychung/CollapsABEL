@@ -51,5 +51,12 @@ collrinfo = function(wDir=".") {
 
 summary.collrinfo = function(hub) {
     message("Main plink files:")
-    print(hub$mainPlinkFiles)
+    catmat(matrix(hub$mainPlinkFiles, ncol=1))
+    tryCatch({
+        NextMethod()
+    }, warning = function(w) {
+    }, error = function(e) {
+    }, finally = {
+    })
+    invisible(NULL)
 }

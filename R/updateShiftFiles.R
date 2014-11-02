@@ -5,8 +5,14 @@ updateShiftFiles = function(hub) {
         hub$shiftFilesBim = paste(hub$shiftFilesStem, ".bim", sep="")
         hub$shiftFilesFam = paste(hub$shiftFilesStem, ".fam", sep="")
     }
-    if(!all(file.exists(hub$shiftFilesBim) || !all(file.exists(hub$shiftFilesFam)))) {
-        updateBimFam(hub)
+
+    updateBimFam(hub)
+
+    hub$shiftFilesBed = sort(Sys.glob(sprintf("%s*.bed", hub$shiftStemCommon)))
+    if(length(hub$shiftFilesBed) > 0) {
+        hub$shiftFilesStem = getstem(hub$shiftFilesBed)
+        hub$shiftFilesBim = paste(hub$shiftFilesStem, ".bim", sep="")
+        hub$shiftFilesFam = paste(hub$shiftFilesStem, ".fam", sep="")
     }
 
     # get shift numbers

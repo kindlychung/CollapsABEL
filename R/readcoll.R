@@ -1,6 +1,19 @@
-readcoll = function(hub, plinkOutExt = "assoc.linear") {
-    hub$plinkOutExt = plinkOutExt
-    hub$outRdata = paste(hub$bedStem, ".RData", sep="")
+readcoll = function(hub, plinkOutExt) {
+    if(missing(plinkOutExt)) {
+        if(is.null(hub$plinkOutExt)) {
+            stop("plinkOutExt is not provided and also not inferred in the hub.")
+        }
+    } else {
+        if(is.null(hub$plinkOutExt)) {
+            hub$plinkOutExt = plinkOutExt
+        } else {
+            if(plinkOutExt != hub$plinkOutExt) {
+                warning("The plinkOutExt you provided differs from the one in the hub.")
+                hub$plinkOutExt = plinkOutExt
+            }
+        }
+    }
+
     hub$plinkOutFiles = sort(Sys.glob(paste(hub$shiftStemCommon, "*.", hub$plinkOutExt, sep="")))
 
     if(length(hub$plinkOutFiles) != length(hub$shiftFilesBed)) {
@@ -8,6 +21,9 @@ readcoll = function(hub, plinkOutExt = "assoc.linear") {
     }
 
     firstPlinkOut = hub$plinkOutFiles[1]
+    ending = sprintf("_shift_0000.%s", hub$plinkOutExt)
+    if(!grepl(ending, firstPlinkOut)) stop(sprintf("Something wrong with filenames, the first shifted bed filename should end with %s", ending))
+
     tmpChr = readplinkoutr(firstPlinkOut, "CHR")
     hub$nsnp = nrow(tmpChr)
     hub$chrunique = sort(unique(tmpChr[, 1]))
@@ -29,4 +45,10 @@ readcoll = function(hub, plinkOutExt = "assoc.linear") {
     }
     updateMinPvals(hub)
     updateSnp2Info(hub)
+
+    invisible(NULL)
+}
+
+readcoll.task = function(hub, taskName, plinkOutExt) {
+    readcoll(hub[[taskName]])
 }

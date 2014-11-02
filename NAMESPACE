@@ -1,4 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-import(txtutils2)
+import(txtutils)
+import(manqq2)
 import(stringr)
 import(dplyr)
