@@ -28,12 +28,13 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
         if(traitType == "bin") hubtask$fullGwasOutExt = "assoc"
         else                   hubtask$fullGwasOutExt = "qassoc"
     }
-    hubtask$fullGwasOut = sprintf("%s.%s", hubtask$bedStem, hubtask$fullGwasOutExt) 
+    hubtask$fullGwasOutStem = file.path(hub$fullGwasDir, sprintf("%s_%s", basename(hub$bedStem), taskName))
+    hubtask$fullGwasOut = sprintf("%s.%s", hubtask$fullGwasOutStem, hubtask$fullGwasOutExt)
 
     if(initGwas) {
         tmplist = hubtask$initPlinkArgs
         tmplist$bfile = hub$bedStem
-        tmplist$out   = hubtask$bedStem
+        tmplist$out   = hubtask$fullGwasOutStem
         do.call(plinkr, tmplist)
     }
 

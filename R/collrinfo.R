@@ -3,6 +3,8 @@ collrinfo = function(wDir=".") {
     class(hub) = c(class(hub), "collrinfo")
     hub$wDir = wDir
     hub$tmpdir = homeTmpDir()
+    hub$fullGwasDir = file.path(wDir, "collr_full_gwas")
+    if(!file.exists(hub$fullGwasDir)) dir.create(hub$fullGwasDir)
     rootAllBedFiles = Sys.glob(file.path(wDir, "*.bed"))
     shiftIdx = grepl("_shift_", rootAllBedFiles)
     rootNonShiftBedFiles = rootAllBedFiles[!shiftIdx]
