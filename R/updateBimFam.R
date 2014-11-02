@@ -35,6 +35,7 @@ updateBimFam = function(hub) {
             }, 
             error = function(e) {
                 message("Error in updateBimFam!")
+                traceback()
                 return(invisible(FALSE))
             }, 
             finally = {
