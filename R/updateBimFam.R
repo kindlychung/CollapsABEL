@@ -3,9 +3,10 @@ updateBimFam = function(hub) {
     shift0BedFile = paste(hub$bedStem, "_shift_0000.bed", sep="")
     shift0FamFile = paste(hub$bedStem, "_shift_0000.fam", sep="")
     shift0BimFile = paste(hub$bedStem, "_shift_0000.bim", sep="")
-    file.remove(c(shift0FamFile, shift0FamFile, shift0BimFile))
-    file.remove(hub$shiftFilesBim)
-    file.remove(hub$shiftFilesFam)
+
+    rmList = c(shift0FamFile, shift0FamFile, shift0BimFile, hub$shiftFilesBim, hub$shiftFilesFam)
+    rmList = rmList(file.exists(rmList))
+    file.remove(rmList)
 
     # Linking bim and fam files
     currentDir = getwd()
