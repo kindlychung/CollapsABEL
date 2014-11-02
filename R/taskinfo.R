@@ -8,8 +8,11 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
 
     hubtask$taskPath = file.path(hub$wDir, sprintf("collr_task_%s", taskName))
     hubtask$taskPlotPath = file.path(hubtask$taskPath, "collr_plots")
-    if(! file.exists(hubtask$taskPath))     dir.create(hubtask$taskPath)
-    if(! file.exists(hubtask$taskPlotPath)) dir.create(hubtask$taskPlotPath)
+    if(file.exists(hubtask$taskPath)) unlink(hubtask$taskPath, recursive=TRUE, force=TRUE)
+    if(file.exists(hubtask$taskPlotPath)) unlink(hubtask$taskPlotPath, recursive=TRUE, force=TRUE)
+    dir.create(hubtask$taskPath)
+    dir.create(hubtask$taskPlotPath)
+
     hubtask$bedStem = file.path(hubtask$taskPath, basename(hub$bedStem))
     ## hubtask$taskBedPath = sprintf("%s.bed", hubtask$taskBedStem)
     ## hubtask$taskFamPath = sprintf("%s.fam", hubtask$taskBedStem)

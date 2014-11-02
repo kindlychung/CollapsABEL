@@ -31,10 +31,10 @@ taskBedsPlinkOut(hubcollr, "test2", "collr_task_test2/mmp13.qassoc", .1, 1, 10)
 taskAnalyze(hubcollr, "test2")
 readcoll.task(hubcollr, "test2")
 contrastPlot(hubcollr$test2)
-
+debug(bedcollinfo)
 plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
-crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, TRUE, "con", 0.1)
+crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, TRUE, "con", 0.1, 5)
 
 require(collr)
 plinkArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", covar = "RS123.1kg.pheno/dermatology.csv", covar_name = "sex,age,SC,SunProtect", logistic = "hide-covar", one = "", pheno_name = "EasilyBurn")                                                                                  
