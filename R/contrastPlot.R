@@ -60,5 +60,6 @@ contrastPlot = function(hub, chrfilter=NULL, bplower=NULL, bpupper=NULL, pvallow
     colorvec = colorvec[posorder]
     
     resinfo = mqinfo(chr=chrvec, bp=bpvec, p=pvalsvec, colorvec=colorvec)
-    suppressWarnings(mh(resinfo))
+    hub$contrastPlotOut = suppressWarnings(mh(resinfo))
+    hub$contrastPlotOut
 }
