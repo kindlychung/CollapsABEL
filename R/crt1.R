@@ -11,5 +11,8 @@ crt1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, tra
     hubtask$contrastPlotRes = contrastPlot(hubcollr[[taskName]])
     hubtask$taskContrastPlotFile = file.path(hubtask$taskPlotPath, "contrastPlot.png")
     ggsave(plot = hubtask$contrastPlotRes, filename = hubtask$taskContrastPlotFile, width=10, height=5)
+
+    hubtask$workspaceImageFile = file.path(hubtask$taskPath, "taskWorkspace.RData")
+    save(hubcollr, file=hubtask$workspaceImageFile)
     hubtask$contrastPlotRes
 }
