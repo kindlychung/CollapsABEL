@@ -9,5 +9,7 @@ crt1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, tra
     taskAnalyze(hubcollr, taskName)
     readcoll.task(hubcollr, taskName)
     hubtask$contrastPlotRes = contrastPlot(hubcollr[[taskName]])
+    hubtask$taskContrastPlotFile = file.path(hubtask$taskPlotPath, "contrastPlot.png")
+    ggsave(plot = hubtask$contrastPlotRes, filename = hubtask$taskContrastPlotFile, width=10, height=5)
     hubtask$contrastPlotRes
 }
