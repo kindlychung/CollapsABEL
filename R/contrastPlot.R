@@ -1,4 +1,4 @@
-contrastPlot = function(hub, chrfilter=NULL, bplower=NULL, bpupper=NULL, pvallower=NULL, pvalupper=NULL, bonferroni=TRUE) {
+contrastPlot = function(hub, chrfilter=NULL, bplower=NULL, bpupper=NULL, pvallower=NULL, pvalupper=NULL, bonferroni=FALSE) {
     filter = rep(TRUE, hub$nsnp)
     filtered = FALSE
     if(! is.null(chrfilter)) {
