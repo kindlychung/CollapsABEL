@@ -81,12 +81,6 @@ snpTopHits.n = function(hub, nHits) {
         idx = (flankDat$dist1 > -0.1e6) & (flankDat$dist2 < 0.1e6)
         flankDat = flankDat[which(idx), ]
         hub$topSnpFlank[[label]] = flankDat
-        outfilename = sprintf("%s_topflank.csv", label)
-        outfilepath = file.path(hub$tmpdir, outfilename)
-        write.table(flankDat, file=outfilepath, quote=FALSE, row.names=FALSE)
-
-
-
     }
     invisible(NULL)
 }
