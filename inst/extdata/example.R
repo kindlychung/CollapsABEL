@@ -5,39 +5,14 @@ install_bitbucket("kindlychung/txtutils")
 # install_bitbucket("kindlychung/autoGmail")
 install_bitbucket("kindlychung/collr2")
 
-setwd("~/Desktop/mmp3")
-hubcollr = collrinfo()
-summary(hubcollr)
-# bedcollinfo(hubcollr, genbed = TRUE, nShiftMin = 1, nShiftMax = 5)
-bedcollinfo(hubcollr, genbed = FALSE, nShiftMin = 1, nShiftMax = 5)
-plinkargs = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
-qcfilter = getPlinkParam(maf=.01, hwe=1e-4)
-taskinfo(hubcollr, "test1", plinkargs, qcfilter, TRUE)
-taskBedsPlinkOut(hubcollr, "test1", "collr_task_test1/mmp13.assoc.linear", .1, 1, 10)
-taskAnalyze(hubcollr, "test1")
-readcoll.task(hubcollr, "test1")
-basePlot(hubcollr$test1)
-minPlot(hubcollr$test1)
-contrastPlot(hubcollr$test1)
 
+require(collr2)
 setwd("~/Desktop/mmp3")
-hubcollr = collrinfo()
-# bedcollinfo(hubcollr, genbed = TRUE, nShiftMin = 1, nShiftMax = 5)
-bedcollinfo(hubcollr, genbed = FALSE)
-plinkargs = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
-qcfilter = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
-taskinfo(hubcollr, "test2", plinkargs, qcfilter, FALSE, "con")
-taskBedsPlinkOut(hubcollr, "test2", "collr_full_gwas/mmp13_test4.qassoc", .1, 1, 10)
-taskAnalyze(hubcollr, "test2")
-readcoll.task(hubcollr, "test2")
-p = contrastPlot(hubcollr$test2)
-# undebug(bedcollinfo)
-# undebug(taskinfo)
-# debug(bedcollinfo)
-# debug(taskinfo)
 plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
-crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, TRUE, "con", 0.1, 5)
+crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, TRUE, 0.1, 5)
+debug(permute)
+permute(plinkArgs = plinkArgs, initGwasArgs = initGwasArgs, phenoFileOrig = "mmp13.phe", pFilter = .1, nShiftMax = 50)
 
 require(collr2)
 plinkArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", covar = "RS123.1kg.pheno/dermatology.csv", covar_name = "sex,age,SC,SunProtect", logistic = "hide-covar", one = "", pheno_name = "EasilyBurn")                                                                                  
@@ -50,50 +25,7 @@ initGwasArgs  = getPlinkParam(maf = 0.01, hwe = 1e-4, geno=0.02)
 taskRoutine( taskname="AK_s200", plinkParamList=plinkParamList, nMaxShift=200, pvalThresh=1e-3, initPlinkArgs = initPlinkArgs)
 
 
-debug(crt1)
-debug(taskinfo)
 
-
-hubcollr$test1$nsnp
-hubcollr$test1$bp[1:10, 1:10]
-hubcollr$test1$bp2[1:10, 1:10]
-hubcollr$test1$snp[1:10, 1:10]
-hubcollr$test1$snp2[1:10, 1:10]
-
-options(warn = 2, keep.source = TRUE, error = 
-            quote({ 
-                cat("Environment:\n", file=stderr()); 
-                dump.frames();  # writes to last.dump
-                n <- length(last.dump)
-                calls <- names(last.dump)
-                cat(paste("  ", 1L:n, ": ", calls, sep = ""), sep = "\n", file=stderr())
-                cat("\n", file=stderr())
-                if (!interactive()) {
-                    q()
-                }
-            }),
-        warning.expression =             quote({ 
-            cat("Environment:\n", file=stderr()); 
-            dump.frames();  # writes to last.dump
-            n <- length(last.dump)
-            calls <- names(last.dump)
-            cat(paste("  ", 1L:n, ": ", calls, sep = ""), sep = "\n", file=stderr())
-            cat("\n", file=stderr())
-            if (!interactive()) {
-                q()
-            }
-        })
-        )
-
-install.packages(c("doParallel", "foreach"))
-
-shuffleLines = function(phenoFileOrig, phenoFile, shuffleVar) {
-    tab = read.table(phenoFileOrig, head=TRUE)
-    print(head(tab, 3))
-    tab[, shuffleVar] = sample(tab[, shuffleVar])
-    print(head(tab, 3))
-    write.table(tab, phenoFile, quote = FALSE, row.names = FALSE)
-}
 
 require(collr2)
 setwd("/media/data1/kaiyin/RS123_1KG/")
@@ -122,51 +54,8 @@ for(i in 1:100) {
     unlink(hubcollr[[taskName]]$taskPath, recursive = TRUE, force = TRUE)
 }
 
-############################################################
-args <- commandArgs(trailingOnly = TRUE)
-print(args)
 
-require(collr2)
-setwd("~/Desktop/mmp3")
-globalMinVec = numeric(0)
-phenoFileOrig = "mmp13.phe"
-phenoFile = "~/Desktop/shuffle_pheno.csv"
-taskName = sprintf("easilyburn2_permutation_%d", i)
-shuffleLines(phenoFileOrig, phenoFile, "Page")
-plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = phenoFile, pheno_name = "Page", covar = phenoFile, covar_name = "Sex,Cage", linear = "hide-covar")
-initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = phenoFile, pheno_name = "Page", assoc= "")
-rm(hubcollr)
-hubcollr = collrinfo()
-bedcollinfo(hubcollr, genbed=FALSE)
-taskinfo(hubcollr, taskName, plinkArgs, initGwasArgs, TRUE, "con")
-taskBedsPlinkOut(hubcollr, taskName, hubcollr[[taskName]]$fullGwasOut, .2, 1, 10)
-taskAnalyze(hubcollr, taskName)
-readcoll.task(hubcollr, taskName)
-contrastPlot(hubcollr[[taskName]])
-globalMin = min(hubcollr[[taskName]]$minPvals)
-print(globalMin)
-if(globalMin > 1)      globalMin = 1
-if(globalMin < 1e-300) globalMin = 1e-300
-globalMinVec = c(globalMinVec, globalMin)
-unlink(hubcollr[[taskName]]$taskPath, recursive = TRUE, force = TRUE)
 
-setwd("/media/data1/kaiyin/erf4/")
-hubcollr = collrinfo()
-bedcollinfo(hubcollr, genbed = FALSE)
-plinkArgs = getPlinkParam(allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", covar = "erf4.pheno/erf_all_phdata.txt", covar_name = "sex,age", linear = "hide-covar")
-intitGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", assoc= "")
-taskinfo(hubcollr, "test2", plinkArgs, initGwasArgs, TRUE, "con")
-taskBedsPlinkOut(hubcollr, "test2", "collr_full_gwas/mmp13_test4.qassoc", .1, 1, 10)
-taskAnalyze(hubcollr, "test2")
-readcoll.task(hubcollr, "test2")
-p = contrastPlot(hubcollr$test2)
-
-# erf4 huid07, winszie=20
-setwd("/media/data1/kaiyin/erf4/")
-require(collr2)
-plinkArgs = getPlinkParam(allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", covar = "erf4.pheno/erf_all_phdata.txt", covar_name = "sex,age", linear = "hide-covar")
-initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", assoc= "")
-crt1(".", "huid07a", plinkArgs, initGwasArgs, TRUE, "con", 0.001, 20)
 
 # erf4 huid07, winszie=200
 setwd("/media/data1/kaiyin/erf4/")
@@ -174,3 +63,48 @@ require(collr2)
 plinkArgs = getPlinkParam(allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", covar = "erf4.pheno/erf_all_phdata.txt", covar_name = "sex,age", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", assoc= "")
 crt1(".", "huid07b", plinkArgs, initGwasArgs, TRUE, "con", 0.001, 200)
+
+
+shuffleLines = function(phenoFileOrig, phenoFile, shuffleVar) {
+    tab = read.table(phenoFileOrig, head=TRUE)
+    # print(head(tab, 10))
+    tab[, shuffleVar] = sample(tab[, shuffleVar])
+    # print(head(tab, 10))
+    write.table(tab, phenoFile, quote = FALSE, row.names = FALSE)
+}
+permute = function(plinkArgs, initGwasArgs, phenoFileOrig, phenoFileShuffle = "~/Desktop/shuffle_pheno.csv", wDir=".", n=100) {
+    setwd(wDir)
+    globalMinVec = numeric(0)
+    plinkArgs$pheno = phenoFileShuffle
+    if(!is.null(plinkArgs$covar))  plinkArgs$covar = phenoFileShuffle
+    initGwasArgs$pheno = phenoFileShuffle
+    taskName = "permutation_analysis"
+    for(i in 1:n) {
+        shuffleLines(phenoFileOrig, phenoFileShuffle, plinkArgs$pheno_name)
+        hubcollr = collrinfo()
+        bedcollinfo(hubcollr, genbed=FALSE)
+        taskinfo(hubcollr, taskName, plinkArgs, initGwasArgs, TRUE)
+        taskBedsPlinkOut(hubcollr, taskName, hubcollr[[taskName]]$fullGwasOut, 1e-3, 1, 200)
+        taskAnalyze(hubcollr, taskName)
+        readcoll.task(hubcollr, taskName)
+        globalMin = min(hubcollr[[taskName]]$minPvals)
+        if(globalMin > 1)      globalMin = 1
+        if(globalMin < 1e-300) globalMin = 1e-300
+        globalMinVec = c(globalMinVec, globalMin)
+        message("*****************************************************")
+        print(globalMinVec)
+        message("*****************************************************")
+        unlink(hubcollr[[taskName]]$taskPath, recursive = TRUE, force = TRUE)
+    }
+    globalMinVec
+}
+
+
+require(collr2)
+setwd("/media/data1/kaiyin/erf4")
+phenoFileOrig = "erf4.pheno/erf_all_phdata.txt"
+
+
+require(collr2)
+plinkArgs = getPlinkParam(allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", covar = "erf4.pheno/erf_all_phdata.txt", covar_name = "sex,age", linear = "hide-covar")
+initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", assoc= "")

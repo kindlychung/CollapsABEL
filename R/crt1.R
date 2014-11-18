@@ -1,9 +1,8 @@
-crt1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, traitType=c("bin", "con"), pFilter=.05, nMaxShift) {
-    traitType = match.arg(traitType)
+crt1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, pFilter=.05, nMaxShift) {
     setwd(wDir)
     hubcollr = collrinfo()
     bedcollinfo(hubcollr, genbed = FALSE)
-    taskinfo(hubcollr, taskName, plinkArgs, initGwasArgs, initGwas, traitType)
+    taskinfo(hubcollr, taskName, plinkArgs, initGwasArgs, initGwas)
     hubtask = hubcollr[[taskName]]
     taskBedsPlinkOut(hubcollr, taskName, hubtask$fullGwasOut, pFilter, 1, nMaxShift)
     taskAnalyze(hubcollr, taskName)

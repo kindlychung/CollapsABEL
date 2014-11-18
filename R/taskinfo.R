@@ -1,5 +1,4 @@
-taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE, traitType=c("bin", "con")) {
-    traitType = match.arg(traitType)
+taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE) {
     hub[[taskName]] = new.env()
     hubtask = hub[[taskName]]
 
@@ -17,6 +16,15 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
     ## hubtask$taskBedPath = sprintf("%s.bed", hubtask$taskBedStem)
     ## hubtask$taskFamPath = sprintf("%s.fam", hubtask$taskBedStem)
     ## hubtask$taskBimPath = sprintf("%s.bim", hubtask$taskBedStem)
+
+    ## require(txtutils)
+    ## require(collr2)
+    ## setwd("~/Desktop/mmp")
+    ## ## plinkParamList = getPlinkParam(allow_no_sex="", pheno="mmp13.phe", pheno_name="Cage")
+    sample_pheno = readfwHead(filename = plinkParamList$pheno, colnameSelect = plinkParamList$pheno_name)
+    sample_pheno[[1]] = as.numeric(sample_pheno[[1]])
+    traitType = checkBinaryTrait(sample_pheno[[1]])
+
 
     hubtask$plinkParamNames = names(hubtask$plinkParamList)
     hubtask$initPlinkArgNames = names(hubtask$initPlinkArgs)
