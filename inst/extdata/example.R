@@ -6,13 +6,13 @@ install_bitbucket("kindlychung/txtutils")
 install_bitbucket("kindlychung/collr2")
 
 
-require(collr2)
+library(collr2)
 setwd("~/Desktop/mmp3")
 plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
 crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, TRUE, 0.1, 5)
 debug(permute)
-permute(plinkArgs = plinkArgs, initGwasArgs = initGwasArgs, phenoFileOrig = "mmp13.phe", pFilter = .1, nShiftMax = 50)
+permute(plinkArgs = plinkArgs, initGwasArgs = initGwasArgs, phenoFileOrig = "mmp13.phe", pFilter = .2, nShiftMax = 20)
 
 require(collr2)
 plinkArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", covar = "RS123.1kg.pheno/dermatology.csv", covar_name = "sex,age,SC,SunProtect", logistic = "hide-covar", one = "", pheno_name = "EasilyBurn")                                                                                  

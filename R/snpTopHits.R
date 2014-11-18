@@ -55,8 +55,8 @@ snpTopHits.n = function(hub, nHits) {
         topsnp2 = as.character(topsnp2)
         topbp1 = chrdat$bp[1]
         topbp2 = chrdat$bp2[1]
-        rownum1 = which(.hub$snp[, 1] == topsnp1)
-        rownum2 = which(.hub$snp[, 1] == topsnp2)
+        rownum1 = which(hub$snp[, 1] == topsnp1)
+        rownum2 = which(hub$snp[, 1] == topsnp2)
         bpDist = abs(topbp1 - topbp2)
         summaryDat = data.frame(snp1 = topsnp1, snp2 = topsnp2, 
                               bp1 = topbp1, bp2 = topbp2, 
