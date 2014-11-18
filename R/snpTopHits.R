@@ -1,6 +1,6 @@
-snpTopHits.n = function(hub, nHits) {
+snpTopHits.n = function(hub, nHits, threshold=5e-8) {
     # idx = order(hub$minPvalsBonfer)[1:nHits]
-    idx = which(hub$minPvalsBonfer < 5e-8)
+    idx = which(hub$minPvals < threshold)
     extractMinPvals = hub$minPvals[idx]
     extractMinPvalsBonfer = hub$minPvalsBonfer[idx]
 
