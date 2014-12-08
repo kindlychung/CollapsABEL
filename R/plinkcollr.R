@@ -667,6 +667,7 @@ plinkcollr = function(
     nfiles = length(plinkcollFileStems)
     nscanned = 0
 	for(bedFile in plinkcollFileStems) {
+        message(sprintf("Running plink on %s...", bedFile))
 		localParam = paramNameThenValue
 		localParam = c("--bfile", bedFile, "--out", bedFile, localParam)
         ret = system2("plink", localParam, wait=wait, stdout=NULL, stderr=NULL)

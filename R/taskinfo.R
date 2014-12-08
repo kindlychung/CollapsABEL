@@ -23,7 +23,10 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
     ## ## plinkParamList = getPlinkParam(allow_no_sex="", pheno="mmp13.phe", pheno_name="Cage")
     sample_pheno = readfwHead(filename = plinkParamList$pheno, colnameSelect = plinkParamList$pheno_name)
     sample_pheno[[1]] = as.numeric(sample_pheno[[1]])
-    traitType = checkBinaryTrait(sample_pheno[[1]])
+    if(!is.null(plinkParamList$missing_phenotype)) 
+        traitType = checkBinaryTrait(sample_pheno[[1]], plinkParamList$missing_phenotype)
+    else 
+        traitType = checkBinaryTrait(sample_pheno[[1]])
 
 
     hubtask$plinkParamNames = names(hubtask$plinkParamList)

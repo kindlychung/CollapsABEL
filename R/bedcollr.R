@@ -1,4 +1,7 @@
 bedcollr = function(bfile=NULL, nshift_min=1, nshift_max=NULL) {
+    checkFileExists(bfile + ".bed")
+    message(sprintf("Shifting bed file: %s", bfile))
+    
 	paramList = mget(names(formals()),sys.frame(sys.nframe()))
 	paramVector = unlist(paramList)
 	paramVector = paramVector[!is.null(paramVector)]

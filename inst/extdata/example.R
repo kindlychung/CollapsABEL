@@ -10,19 +10,20 @@ library(collr2)
 setwd("~/Desktop/mmp3")
 plinkArgs    = getPlinkParam(allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", covar = "mmp13.phe", covar_name = "Sex,Cage", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "mmp13.phe", pheno_name = "Page", assoc= "")
-crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, TRUE, 0.1, 5)
+crt1("~/Desktop/mmp3", "test4", plinkArgs, initGwasArgs, FALSE, 0.1, 5)
+
 debug(permute)
-permute(plinkArgs = plinkArgs, initGwasArgs = initGwasArgs, phenoFileOrig = "mmp13.phe", pFilter = .2, nShiftMax = 20)
+pv = permute(plinkArgs = plinkArgs, initGwasArgs = initGwasArgs, phenoFileOrig = "mmp13.phe", pFilter = .2, nShiftMax = 10, n=10)
+sort(pv)
 
 require(collr2)
+setwd("/media/data1/kaiyin/RS123_1KG/")
 plinkArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", covar = "RS123.1kg.pheno/dermatology.csv", covar_name = "sex,age,SC,SunProtect", logistic = "hide-covar", one = "", pheno_name = "EasilyBurn")                                                                                  
-initGwasArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", one = "", pheno_name = "EasilyBurn", assoc="", maf = 0.01, hwe = 1e-4, geno=0.02)
-crt1("/media/data1/kaiyin/RS123_1KG", "easilyburn2_s10", plinkArgs, initGwasArgs, TRUE, "bin", 1e-3, 10)
+initGwasArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", one = "", pheno_name = "EasilyBurn", assoc="")
+debug(crt1)
+crt1("/media/data1/kaiyin/RS123_1KG", "easilyburn2_s200a", plinkArgs, initGwasArgs, FALSE, 1e-5, 5)
 
-setwd("/media/data1/kaiyin/RS123_1KG")
-plinkArgs = getPlinkParam(allow_no_sex = "", missing_phenotype = 9999, pheno = "RS123.1kg.pheno/dermatology.csv", covar = "RS123.1kg.pheno/dermatology.csv", covar_name = "sex,age,SC", linear = "hide-covar", pheno_name = "AK")
-initGwasArgs  = getPlinkParam(maf = 0.01, hwe = 1e-4, geno=0.02)
-taskRoutine( taskname="AK_s200", plinkParamList=plinkParamList, nMaxShift=200, pvalThresh=1e-3, initPlinkArgs = initPlinkArgs)
+
 
 
 
@@ -53,6 +54,7 @@ for(i in 1:100) {
     message("*****************************************************")
     unlink(hubcollr[[taskName]]$taskPath, recursive = TRUE, force = TRUE)
 }
+perm
 
 
 
