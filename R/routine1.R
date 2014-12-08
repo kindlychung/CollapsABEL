@@ -1,4 +1,4 @@
-crt1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, pFilter=.05, nMaxShift) {
+routine1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE, pFilter=.05, nMaxShift) {
     setwd(wDir)
     hubcollr = collrinfo()
     bedcollinfo(hubcollr, genbed = FALSE)
