@@ -5,14 +5,14 @@ routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkAr
         stop("pheno_name and covar_name must be strings of variable names separated by comma.")
     }
 
-    within(plinkArgs, {
+    plinkArgs = within(plinkArgs, {
         pheno = pheno
         pheno_name = pheno_name
         covar = covar
         covar_name = covar_name
     })
 
-    within(initGwasArgs, {
+    initGwasArgs = within(initGwasArgs, {
         pheno = pheno
         pheno_name = pheno_name
         assoc = ""
