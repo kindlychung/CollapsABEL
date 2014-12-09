@@ -1,4 +1,4 @@
-routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkArgs, initGwas=TRUE, initGwasArgs, pFilter, nMaxShift) {
+routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkArgs, initGwas=FALSE, initGwasArgs, pFilter, nMaxShift) {
     if(is.null(covar)) covar = pheno
     checkFileExists(c(wDir, pheno, covar))
     if(!is.character(c(pheno_name, covar_name))) {
@@ -25,8 +25,8 @@ routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkAr
         taskName = taskName,
         plinkArgs = plinkArgs,
         initGwasArgs = initGwasArgs,
-        initGwas = initGwas,
         pFilter = pFilter,
+        initGwas = initGwas,
         nMaxShift = nMaxShift
     )
 }

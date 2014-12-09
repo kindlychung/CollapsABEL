@@ -23,9 +23,9 @@ taskinfo = function(hub, taskName, plinkArgs, initGwasArgs, initGwas=FALSE) {
     ## ## plinkArgs = getPlinkParam(allow_no_sex="", pheno="mmp13.phe", pheno_name="Cage")
     sample_pheno = readfwHead(filename = plinkArgs$pheno, colnameSelect = plinkArgs$pheno_name)
     sample_pheno[[1]] = as.numeric(sample_pheno[[1]])
-    if(!is.null(plinkArgs$missing_phenotype)) 
+    if(!is.null(plinkArgs$missing_phenotype))
         traitType = checkBinaryTrait(sample_pheno[[1]], plinkArgs$missing_phenotype)
-    else 
+    else
         traitType = checkBinaryTrait(sample_pheno[[1]])
 
 
@@ -39,14 +39,16 @@ taskinfo = function(hub, taskName, plinkArgs, initGwasArgs, initGwas=FALSE) {
         if(traitType == "bin") hubtask$fullGwasOutExt = "assoc"
         else                   hubtask$fullGwasOutExt = "qassoc"
     }
-    hubtask$fullGwasOutStem = file.path(hub$fullGwasDir, sprintf("%s_%s", basename(hub$bedStem), taskName))
+    hubtask$fullGwasOutStem = file.path(hub$fullGwasDir, digest(hubtask$initGwasArgs))
     hubtask$fullGwasOut = sprintf("%s.%s", hubtask$fullGwasOutStem, hubtask$fullGwasOutExt)
 
-    if(initGwas) {
+    if(!file.exists(hubtask$fullGwasOut) || initGwas) {
         tmplist = hubtask$initGwasArgs
         tmplist$bfile = hub$bedStem
         tmplist$out   = hubtask$fullGwasOutStem
         do.call(plinkr, tmplist)
+    } else {
+        message("Full GWAS has already been run.")
     }
 
     invisible(NULL)
