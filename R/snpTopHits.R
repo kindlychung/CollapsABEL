@@ -1,4 +1,4 @@
-snpTopHits.n = function(hub, nHits, threshold=5e-8) {
+snpTopHits.n = function(hub, nHits, threshold=5e-8, sameChr=TRUE, lowerPbonfer=TRUE) {
     # idx = order(hub$minPvalsBonfer)[1:nHits]
     idx = which(hub$minPvals < threshold)
     extractMinPvals = hub$minPvals[idx]
@@ -33,8 +33,14 @@ snpTopHits.n = function(hub, nHits, threshold=5e-8) {
             chr2 = minPvalChr2, snp2 = minPvalSnp2, bp2 = minPvalBp2,
             p = extractMinPvals, pbonfer = extractMinPvalsBonfer,
             pbase1 = extractPbase, pbase2 = extractPbase2, stringsAsFactors=FALSE)
-    idx = (res$chr == res$chr2)
-    idx = idx & (res$pbonfer < res$pbase1) & (res$pbonfer < res$pbase2)
+
+    idx = rep(TRUE, nrow(res))
+    if(sameChr) {
+        idx = idx & (res$chr == res$chr2)
+    }
+    if(lowerPbonfer) {
+        idx = idx & (res$pbonfer < res$pbase1) & (res$pbonfer < res$pbase2)
+    }
     res = res[idx, ]
 
     hub$topSnpList = list()
@@ -58,13 +64,13 @@ snpTopHits.n = function(hub, nHits, threshold=5e-8) {
         rownum1 = which(hub$snp[, 1] == topsnp1)
         rownum2 = which(hub$snp[, 1] == topsnp2)
         bpDist = abs(topbp1 - topbp2)
-        summaryDat = data.frame(snp1 = topsnp1, snp2 = topsnp2, 
-                              bp1 = topbp1, bp2 = topbp2, 
+        summaryDat = data.frame(snp1 = topsnp1, snp2 = topsnp2,
+                              bp1 = topbp1, bp2 = topbp2,
                               rownum1 = rownum1, rownum2 = rownum2,
                               bpDist = bpDist, stringsAsFactors = FALSE)
         hub$topHitSummary[[label]] = summaryDat
 
-        rowlow = min(rownum1, rownum2) 
+        rowlow = min(rownum1, rownum2)
         rowup = max(rownum1, rownum2)
         rowlow = ifelse(rowlow > 200, rowlow-200, rowlow)
         maxNrow = hub$nsnp
