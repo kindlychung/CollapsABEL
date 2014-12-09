@@ -5,7 +5,7 @@ routine1 = function(wDir=".", taskName, plinkArgs, initGwasArgs, initGwas=FALSE,
     taskinfo(hubcollr, taskName, plinkArgs, initGwasArgs, initGwas)
     hubtask = hubcollr[[taskName]]
     checkFileExists(hubtask$fullGwasOut)
-    
+
     taskBedsPlinkOut(hubcollr, taskName, hubtask$fullGwasOut, pFilter, 1, nMaxShift)
     taskAnalyze(hubcollr, taskName)
     readcoll.task(hubcollr, taskName)

@@ -1,9 +1,9 @@
-taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE) {
+taskinfo = function(hub, taskName, plinkArgs, initGwasArgs, initGwas=FALSE) {
     hub[[taskName]] = new.env()
     hubtask = hub[[taskName]]
 
-    hubtask$plinkParamList = plinkParamList
-    hubtask$initPlinkArgs = initPlinkArgs
+    hubtask$plinkArgs = plinkArgs
+    hubtask$initGwasArgs = initGwasArgs
 
     hubtask$taskPath = file.path(hub$wDir, sprintf("collr_task_%s", taskName))
     hubtask$taskPlotPath = file.path(hubtask$taskPath, "collr_plots")
@@ -20,17 +20,17 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
     ## require(txtutils)
     ## require(collr2)
     ## setwd("~/Desktop/mmp")
-    ## ## plinkParamList = getPlinkParam(allow_no_sex="", pheno="mmp13.phe", pheno_name="Cage")
-    sample_pheno = readfwHead(filename = plinkParamList$pheno, colnameSelect = plinkParamList$pheno_name)
+    ## ## plinkArgs = getPlinkParam(allow_no_sex="", pheno="mmp13.phe", pheno_name="Cage")
+    sample_pheno = readfwHead(filename = plinkArgs$pheno, colnameSelect = plinkArgs$pheno_name)
     sample_pheno[[1]] = as.numeric(sample_pheno[[1]])
-    if(!is.null(plinkParamList$missing_phenotype)) 
-        traitType = checkBinaryTrait(sample_pheno[[1]], plinkParamList$missing_phenotype)
+    if(!is.null(plinkArgs$missing_phenotype)) 
+        traitType = checkBinaryTrait(sample_pheno[[1]], plinkArgs$missing_phenotype)
     else 
         traitType = checkBinaryTrait(sample_pheno[[1]])
 
 
-    hubtask$plinkParamNames = names(hubtask$plinkParamList)
-    hubtask$initPlinkArgNames = names(hubtask$initPlinkArgs)
+    hubtask$plinkParamNames = names(hubtask$plinkArgs)
+    hubtask$initPlinkArgNames = names(hubtask$initGwasArgs)
     if("linear" %in% hubtask$plinkParamNames)     hubtask$plinkOutExt    = "assoc.linear"
     if("logistic" %in% hubtask$plinkParamNames)   hubtask$plinkOutExt    = "assoc.logistic"
     if("linear" %in% hubtask$initPlinkArgNames)   hubtask$fullGwasOutExt = "assoc.linear"
@@ -43,7 +43,7 @@ taskinfo = function(hub, taskName, plinkParamList, initPlinkArgs, initGwas=FALSE
     hubtask$fullGwasOut = sprintf("%s.%s", hubtask$fullGwasOutStem, hubtask$fullGwasOutExt)
 
     if(initGwas) {
-        tmplist = hubtask$initPlinkArgs
+        tmplist = hubtask$initGwasArgs
         tmplist$bfile = hub$bedStem
         tmplist$out   = hubtask$fullGwasOutStem
         do.call(plinkr, tmplist)
