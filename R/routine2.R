@@ -1,7 +1,7 @@
 routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkArgs, initGwas=TRUE, initGwasArgs, pFilter, nMaxShift) {
     if(is.null(covar)) covar = pheno
     checkFileExists(c(wDir, pheno, covar))
-    if(!is.character(c(pheno_name, covar_name)) || !all(grepl(".*,.*", c(pheno_name, covar_name)))) {
+    if(!is.character(c(pheno_name, covar_name))) {
         stop("pheno_name and covar_name must be strings of variable names separated by comma.")
     }
 
