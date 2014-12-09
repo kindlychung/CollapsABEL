@@ -1,5 +1,5 @@
 cleanByChrPvalsBonfer = function(hub, threshold=5e-8, sameChr=TRUE, lowerPbonfer=TRUE) {
-    if(!is.null(hub$cleanedUpDat)) {
+    if(is.null(hub$cleanedUpDat)) {
         idx = which(hub$minPvals < threshold)
         extractMinPvals = hub$minPvals[idx]
         extractMinPvalsBonfer = hub$minPvalsBonfer[idx]
