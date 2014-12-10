@@ -31,8 +31,10 @@ cleanByChrPvalsBonfer = function(hub, threshold=5e-8, sameChr=TRUE, lowerPbonfer
 
         res = data.frame(chr = minPvalChr, snp = minPvalSnp, bp = minPvalBp,
                 chr2 = minPvalChr2, snp2 = minPvalSnp2, bp2 = minPvalBp2,
+                bpdiff = minPvalBp2 - minPvalBp,
                 p = extractMinPvals, pbonfer = extractMinPvalsBonfer,
                 pbase1 = extractPbase, pbase2 = extractPbase2, stringsAsFactors=FALSE)
+
 
         idx = rep(TRUE, nrow(res))
         if(sameChr) {
