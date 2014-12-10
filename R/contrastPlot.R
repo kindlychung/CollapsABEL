@@ -6,7 +6,8 @@ contrastPlot = function(hub,
                         threshold=0.001,
                         sameChr=TRUE,
                         lowerPbonfer = FALSE,
-                        forceRecalc = TRUE
+                        forceRecalc = TRUE,
+                        bpdiff = 5e5
                         ) {
 
     dat = cleanByChrPvalsBonfer(
@@ -14,7 +15,8 @@ contrastPlot = function(hub,
                                 threshold = threshold,
                                 sameChr = sameChr,
                                 lowerPbonfer = lowerPbonfer,
-                                forceRecalc = forceRecalc
+                                forceRecalc = forceRecalc,
+                                bpdiff = bpdiff
                                 )
 
     filter = rep(TRUE, nrow(dat))
