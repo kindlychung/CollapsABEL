@@ -1,4 +1,4 @@
-cleanByChrPvalsBonfer = function(hub, threshold=5e-8, sameChr=TRUE, lowerPbonfer=TRUE, forceRecalc = TRUE) {
+cleanByChrPvalsBonfer = function(hub, threshold=5e-8, sameChr=TRUE, lowerPbonfer=TRUE, forceRecalc = TRUE, bpdiff=5e5) {
     if(is.null(hub$cleanedUpDat) || forceRecalc) {
         idx = which(hub$minPvals < threshold)
         extractMinPvals = hub$minPvals[idx]
@@ -41,6 +41,7 @@ cleanByChrPvalsBonfer = function(hub, threshold=5e-8, sameChr=TRUE, lowerPbonfer
         if(lowerPbonfer) {
             idx = idx & (res$pbonfer < res$pbase1) & (res$pbonfer < res$pbase2)
         }
+        idx = idx & ((res$bp2 - res$bp) < bpdiff)
         res = res[idx, ]
         hub$cleanedUpDat = res
         res
