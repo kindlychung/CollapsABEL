@@ -39,7 +39,7 @@ contrastPlot = function(hub,
     chrvec   = dat$chr[filter]
     bpvec    = dat$bp[filter]
     basepvalsvec = dat$pbase1[filter]
-    if(bonferroni) {
+    if(!bonferroni) {
         minpvalvec = dat$p[filter]
     } else {
         minpvalvec = dat$pbonfer[filter]
