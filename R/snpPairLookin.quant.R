@@ -12,9 +12,11 @@
 ## require(devtools)
 ## install_bitbucket("kindlychung/rbed2")
 
+install.packages("mice")
 snpPairLookin.quant = function(g1, g2, pheno) {
     g = paste(g1, g2, sep = "")
     g = factor(g, levels = c("00", "10", "01", "20", "11", "02", "21", "12", "22"))
     dat = data.frame(geno=g, pheno=pheno)
-    ggplot(dat, aes(x = pheno)) + geom_density() + facet_grid(geno ~ .)
+    dat = mice::cc(dat)
+    ggplot(dat, aes(x = pheno)) + geom_histogram() + facet_grid(. ~ geno)
 }
