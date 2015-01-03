@@ -20,7 +20,8 @@ contrastPlot = function(hub,
                                 )
 
     # Take single-SNP data from hub, and QCDH data from dat
-    filter = rep(TRUE, nrow(hub$chr) + nrow(dat))
+    filter0 = rep(TRUE, nrow(hub$chr))
+    filter = rep(TRUE, nrow(dat))
     if(! is.null(chrfilter)) {
         filter0 = hub$chr %in% chrfilter
         filter = dat$chr %in% chrfilter
