@@ -23,16 +23,20 @@ contrastPlot = function(hub,
     filter0 = rep(TRUE, nrow(hub$chr))
     filter = rep(TRUE, nrow(dat))
     if(! is.null(chrfilter)) {
-        filter0 = hub$chr %in% chrfilter
+        filter0 = hub$chr[, 1] %in% chrfilter
         filter = dat$chr %in% chrfilter
     }
     if(! is.null(bplower)) {
-        filter0 = filter0 & hub$bp >= bplower
+        filter0 = filter0 & hub$bp[, 1] >= bplower
         filter = filter & dat$bp >= bplower
     }
     if(! is.null(bpupper)) {
-        filter0 = filter0 & hub$bp <= bpupper
+        filter0 = filter0 & hub$bp[, 1] <= bpupper
         filter = filter & dat$bp <= bpupper
+    }
+    if(! is.null(threshold)) {
+        filter0 = filter0 & hub$pvals[, 1] <= threshold
+        filter = filter & dat$p <= threshold
     }
 
     filter0 = which(filter0)
