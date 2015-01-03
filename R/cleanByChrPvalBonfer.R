@@ -7,16 +7,19 @@ cleanByChrPvalsBonfer = function(
                                  bpdiff=5e5
                                  ) {
     if(is.null(hub$cleanedUpDat) || forceRecalc) {
+
         idx = which(hub$minPvals < threshold)
         extractMinPvals = hub$minPvals[idx]
         extractMinPvalsBonfer = hub$minPvalsBonfer[idx]
 
+        # Single-SNP p values, with SNP names labeled
         pbase = hub$pvals[, 1]
-        pbase = as.vector(pbase)
         snpNames = hub$snp[, 1]
         names(pbase) = snpNames
         extractPbase = pbase[idx]
 
+        # submatrix of chr, chr2, snp, snp2, bp, bp2, pvals
+        # with minimal pvals less than threshold
         extractChr = hub$chr[idx, ]
         extractChr2 = hub$chr2[idx, ]
         extractSnp = hub$snp[idx, ]
@@ -25,8 +28,11 @@ cleanByChrPvalsBonfer = function(
         extractBp2 = hub$bp2[idx, ]
         extractPvals = hub$pvals[idx, ]
 
+        # index of minal pvals
         minPvalIdx = apply(extractPvals, 1, which.min)
         minPvalIdxMat = cbind(1:nrow(extractPvals), minPvalIdx)
+
+        # extract info for the SNP pair with minimal pval
         minPvalSnp = extractSnp[minPvalIdxMat]
         minPvalSnp2 = extractSnp2[minPvalIdxMat]
         minPvalChr = extractChr[minPvalIdxMat]

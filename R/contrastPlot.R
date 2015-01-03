@@ -19,36 +19,40 @@ contrastPlot = function(hub,
                                 bpdiff = bpdiff
                                 )
 
-    filter = rep(TRUE, nrow(dat))
-    filtered = FALSE
+    # Take single-SNP data from hub, and QCDH data from dat
+    filter = rep(TRUE, nrow(hub$chr) + nrow(dat))
     if(! is.null(chrfilter)) {
+        filter0 = hub$chr %in% chrfilter
         filter = dat$chr %in% chrfilter
-        # filtered = TRUE
     }
     if(! is.null(bplower)) {
-        #debugps(paste("Filtering by bp lower limit, as you requested..."))
+        filter0 = filter0 & hub$bp >= bplower
         filter = filter & dat$bp >= bplower
-        # filtered = TRUE
     }
     if(! is.null(bpupper)) {
-        #debugps(paste("Filtering by bp upper limit, as you requested..."))
+        filter0 = filter0 & hub$bp <= bpupper
         filter = filter & dat$bp <= bpupper
-        # filtered = TRUE
     }
 
+    filter0 = which(filter0)
     filter = which(filter)
-    colorvec = rep(c("Single SNP", "QCDH"), each=length(filter))
+
+    chrvec0 = hub$chr[filter0, 1]
     chrvec   = dat$chr[filter]
+    bpvec0 = hub$bp[filter0, 1]
     bpvec    = dat$bp[filter]
-    basepvalsvec = dat$pbase1[filter]
-    if(!bonferroni) {
-        minpvalvec = dat$p[filter]
-    } else {
+
+    colorvec = c(rep("Single SNP", length(filter0)), rep("QCDH", length(filter)))
+
+    basepvalsvec = hub$pvals[filter0, 1]
+    if(bonferroni) {
         minpvalvec = dat$pbonfer[filter]
+    } else {
+        minpvalvec = dat$p[filter]
     }
 
-    chrvec = c(chrvec, chrvec)
-    bpvec = c(bpvec, bpvec)
+    chrvec = c(chrvec0, chrvec)
+    bpvec = c(bpvec0, bpvec)
     pvalsvec = c(basepvalsvec, minpvalvec)
 
     posorder = order(chrvec, bpvec)

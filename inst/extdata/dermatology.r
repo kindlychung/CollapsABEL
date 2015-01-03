@@ -16,6 +16,8 @@ debug(permute)
 pv = permute(plinkArgs = plinkArgs, initGwasArgs = initGwasArgs, phenoFileOrig = "mmp13.phe", pFilter = .2, nShiftMax = 10, n=10)
 sort(pv)
 
+
+
 require(collr2)
 setwd("/media/data1/kaiyin/RS123_1KG/")
 plinkArgs = getPlinkParam(
@@ -26,7 +28,7 @@ plinkArgs = getPlinkParam(
     covar_name = "sex,age,SC,SunProtect",
     logistic = "hide-covar",
     one = ""
-)                                                                                  
+)
 initGwasArgs = getPlinkParam(
     allow_no_sex = "",
     missing_phenotype = 9999,
@@ -54,7 +56,7 @@ plinkArgs = getPlinkParam(
     covar = "RS123.1kg.pheno/dermatology.csv",
     covar_name = "sex,age,SC",
     linear = "hide-covar"
-)                                                                                  
+)
 initGwasArgs = getPlinkParam(
     allow_no_sex = "", missing_phenotype = 9999,
     pheno = "RS123.1kg.pheno/dermatology.csv",
@@ -72,6 +74,29 @@ crt1(
 )
 
 
+#############################
+## sagging
+#############################
+require(collr2)
+setwd("/media/data1/NL_AU_UK/NL_AU_UK_sagging_replicate/chr5frag/")
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "",
+    assoc=""
+)
+routine2(
+    pheno = "NL_AU_UK_sagging1.pheno",
+    pheno_name = "sag",
+    covar_name = "sex,age",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    pFilter = 1e-1,
+    nMaxShift = 400
+)
+
 require(collr2)
 setwd("/media/data1/kaiyin/RS123_1KG")
 plinkArgs = getPlinkParam(
@@ -81,7 +106,7 @@ plinkArgs = getPlinkParam(
     covar = "RS123.1kg.pheno/dermatology.csv",
     covar_name = "sex,age,SC",
     linear = "hide-covar"
-)                                                                                  
+)
 initGwasArgs = getPlinkParam(
     allow_no_sex = "", missing_phenotype = 9999,
     pheno = "RS123.1kg.pheno/dermatology.csv",
@@ -108,7 +133,7 @@ plinkArgs = getPlinkParam(
     covar = "RS123.1kg.pheno/dermatology.csv",
     covar_name = "sex,age,SC",
     linear = "hide-covar"
-)                                                                                  
+)
 initGwasArgs = getPlinkParam(
     allow_no_sex = "", missing_phenotype = 9999,
     pheno = "RS123.1kg.pheno/dermatology.csv",

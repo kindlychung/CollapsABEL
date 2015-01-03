@@ -110,3 +110,7 @@ phenoFileOrig = "erf4.pheno/erf_all_phdata.txt"
 require(collr2)
 plinkArgs = getPlinkParam(allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", covar = "erf4.pheno/erf_all_phdata.txt", covar_name = "sex,age", linear = "hide-covar")
 initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "erf4.pheno/erf_all_phdata.txt", pheno_name = "huid07", assoc= "")
+
+require(mvbutils)
+require(collr2)
+foodweb(where = "package:collr2", charlim = 80)
