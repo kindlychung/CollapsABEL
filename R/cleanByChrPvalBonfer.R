@@ -9,6 +9,11 @@ cleanByChrPvalsBonfer = function(
     if(is.null(hub$cleanedUpDat) || forceRecalc) {
 
         idx = which(hub$minPvals < threshold)
+        if(length(idx) == 0) {
+            warning("No p values below the threshold: %f", threshold)
+            return(NULL)
+        }
+
         extractMinPvals = hub$minPvals[idx]
         extractMinPvalsBonfer = hub$minPvalsBonfer[idx]
 
