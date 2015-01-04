@@ -10,7 +10,7 @@ cleanByChrPvalsBonfer = function(
 
         idx = which(hub$minPvals < threshold)
         if(length(idx) == 0) {
-            warning("No p values below the threshold: %f", threshold)
+            warning(sprintf("No p values below the threshold: %f", threshold))
             return(NULL)
         }
 
