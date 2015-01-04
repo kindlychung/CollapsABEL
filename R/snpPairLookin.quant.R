@@ -17,9 +17,8 @@ snpPairLookin.quant = function(g1, g2, pheno) {
     g = factor(g, levels = c("00", "10", "01", "20", "11", "02", "21", "12", "22"))
     dat = data.frame(geno=g, pheno=pheno)
     dat = mice::cc(dat)
-    # normalized histogram, sum + .1, to avoid division-by-zero error
-    ## ggplot(dat, aes(x = pheno)) + geom_histogram(aes(y=..count../(0.1 + sum(..count..)))) + facet_grid(. ~ geno)
-    ggplot(dat, aes(x = pheno, y = ..ncount..)) + geom_histogram() + facet_grid(. ~ geno) + scale_y_continuous(labels = percent_format())
+    ggplot(dat, aes(x = pheno)) + geom_histogram() + facet_grid(. ~ geno)
+    ## ggplot(dat, aes(x = pheno, y = ..ncount..)) + geom_histogram() + facet_grid(. ~ geno) + scale_y_continuous(labels = percent_format())
 }
 
 ## load("/tmp/snpdat5.rda")
