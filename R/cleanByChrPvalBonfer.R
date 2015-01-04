@@ -2,7 +2,7 @@ cleanByChrPvalsBonfer = function(
                                  hub, 
                                  threshold=5e-8, 
                                  sameChr=TRUE, 
-                                 lowerPbonfer=TRUE, 
+                                 lowerPbonfer=FALSE, 
                                  forceRecalc = TRUE, 
                                  bpdiff=5e5
                                  ) {
@@ -59,7 +59,7 @@ cleanByChrPvalsBonfer = function(
             idx = idx & (res$chr == res$chr2)
         }
         if(lowerPbonfer) {
-            idx = idx & (res$pbonfer < res$pbase1) & (res$pbonfer < res$pbase2)
+            idx = idx & (res$p < res$pbase1) & (res$pbonfer < res$pbase2)
         }
         idx = idx & (res$bpdiff < bpdiff)
         res = res[idx, ]
