@@ -43,8 +43,8 @@ readcoll = function(hub, plinkOutExt) {
         plinkOutFile = hub$plinkOutFiles[i]
         appendFromPlinkOut(hub, plinkOutFile)
     }
-    updateMinPvals(hub)
     updateSnp2Info(hub)
+    updateMinPvals(hub)
 
     invisible(NULL)
 }
