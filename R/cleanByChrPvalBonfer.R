@@ -1,8 +1,8 @@
 cleanByChrPvalsBonfer = function(
-                                 hub, 
-                                 threshold=5e-8, 
-                                 lowerPbonfer=FALSE, 
-                                 forceRecalc = TRUE, 
+                                 hub,
+                                 threshold=5e-8,
+                                 lowerPbonfer=FALSE,
+                                 forceRecalc = TRUE
                                  ) {
     if(is.null(hub$cleanedUpDat) || forceRecalc) {
 
