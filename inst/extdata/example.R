@@ -113,4 +113,6 @@ initGwasArgs = getPlinkParam(maf=.01, hwe=1e-4, allow_no_sex = "", pheno = "erf4
 
 require(mvbutils)
 require(collr2)
+# generate a call graph
 foodweb(where = "package:collr2", charlim = 80)
+

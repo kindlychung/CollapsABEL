@@ -1,63 +1,56 @@
-contrastPlot = function(hub,
-                        chrfilter=NULL,
-                        bplower=NULL,
-                        bpupper=NULL,
-                        bonferroni=FALSE,
-                        threshold=0.001,
-                        sameChr=TRUE,
-                        lowerPbonfer = FALSE,
-                        forceRecalc = TRUE,
-                        bpdiff = 5e5
-                        ) {
-
-    dat = cleanByChrPvalsBonfer(
-                                hub = hub,
-                                threshold = threshold,
-                                sameChr = sameChr,
-                                lowerPbonfer = lowerPbonfer,
-                                forceRecalc = forceRecalc,
-                                bpdiff = bpdiff
-                                )
-
-    # Take single-SNP data from hub, and QCDH data from dat
-    filter0 = rep(TRUE, nrow(hub$chr))
-    filter = rep(TRUE, nrow(dat))
+contrastPlot = function(hub, chrfilter=NULL, bplower=NULL, bpupper=NULL, pvallower=NULL, pvalupper=NULL, bonferroni=FALSE) {
+    filter = rep(TRUE, hub$nsnp)
+    filtered = FALSE
     if(! is.null(chrfilter)) {
-        filter0 = hub$chr[, 1] %in% chrfilter
-        filter = dat$chr %in% chrfilter
+        #debugps(paste("Filtering by chromosome, as you requested..."))
+        filter = hub$chr[, 1] %in% chrfilter
+        filtered = TRUE
     }
     if(! is.null(bplower)) {
-        filter0 = filter0 & hub$bp[, 1] >= bplower
-        filter = filter & dat$bp >= bplower
+        #debugps(paste("Filtering by bp lower limit, as you requested..."))
+        filter = filter & hub$bp[, 1] >= bplower
+        filtered = TRUE
     }
     if(! is.null(bpupper)) {
-        filter0 = filter0 & hub$bp[, 1] <= bpupper
-        filter = filter & dat$bp <= bpupper
+        #debugps(paste("Filtering by bp upper limit, as you requested..."))
+        filter = filter & hub$ bp[, 1] <= bpupper
+        filtered = TRUE
     }
-    if(! is.null(threshold)) {
-        filter0 = filter0 & hub$pvals[, 1] <= threshold
-        filter = filter & dat$p <= threshold
+    if(! is.null(pvallower)) {
+        #debugps(paste("Filtering by pval lower limit, as you requested..."))
+        filter = filter & hub$pvals[, 1] > pvallower
+        filtered = TRUE
+    }
+    if(! is.null(pvalupper)) {
+        #debugps(paste("Filtering by pval upper limit, as you requested..."))
+        filter = filter & hub$pvals[, 1] < pvalupper
+        filtered = TRUE
     }
 
-    filter0 = which(filter0)
-    filter = which(filter)
-
-    chrvec0 = hub$chr[filter0, 1]
-    chrvec   = dat$chr[filter]
-    bpvec0 = hub$bp[filter0, 1]
-    bpvec    = dat$bp[filter]
-
-    colorvec = c(rep("Single SNP", length(filter0)), rep("QCDH", length(filter)))
-
-    basepvalsvec = hub$pvals[filter0, 1]
-    if(bonferroni) {
-        minpvalvec = dat$pbonfer[filter]
+    if(filtered) {
+        filter = which(filter)
+        colorvec = rep(c("Single SNP", "QCDH"), each=length(filter))
+        chrvec   = hub$chr[filter, "0000"]
+        bpvec    = hub$bp[filter, "0000"]
+        basepvalsvec = hub$pvals[filter, "0000"]
+        if(bonferroni) {
+            minpvalvec = hub$minPvalsBonfer[filter]
+        } else {
+            minpvalvec = hub$minPvals[filter]
+        }
     } else {
-        minpvalvec = dat$p[filter]
+        colorvec = rep(c("Single SNP", "QCDH"), each=hub$nsnp)
+        chrvec   = hub$chr[, "0000"]
+        bpvec    = hub$bp[, "0000"]
+        basepvalsvec = hub$pvals[, "0000"]
+        if(bonferroni) {
+            minpvalvec = hub$minPvalsBonfer
+        } else {
+            minpvalvec = hub$minPvals
+        }
     }
-
-    chrvec = c(chrvec0, chrvec)
-    bpvec = c(bpvec0, bpvec)
+    chrvec = c(chrvec, chrvec)
+    bpvec = c(bpvec, bpvec)
     pvalsvec = c(basepvalsvec, minpvalvec)
 
     posorder = order(chrvec, bpvec)
