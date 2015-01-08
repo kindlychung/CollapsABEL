@@ -73,6 +73,51 @@ crt1(
     nMaxShift = 200
 )
 
+#############################
+## sagging  test plink
+#############################
+require(collr2)
+setwd("/media/data1/kaiyin/RS123_1KG_test")
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "",
+    assoc=""
+)
+routine2(
+    pheno = "RS123.1kg.pheno/dermatology.csv",
+    pheno_name = "Sagging",
+    covar_name = "sex,age",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    pFilter = 1e-1,
+    nMaxShift = 400
+)
+
+#############################
+## sagging
+#############################
+require(collr2)
+setwd("/media/thecus/kaiyin/RS123_1KG_maf0.01")
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "",
+    assoc=""
+)
+routine2(
+    pheno = "RS123.1kg.pheno/dermatology.csv",
+    pheno_name = "Sagging",
+    covar_name = "sex,age",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    pFilter = 1e-1,
+    nMaxShift = 400
+)
 
 #############################
 ## sagging

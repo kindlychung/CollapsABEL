@@ -16,4 +16,5 @@ routine1 = function(wDir=".", taskName, plinkArgs, initGwas=FALSE, initGwasArgs,
     hubtask$workspaceImageFile = file.path(hubtask$taskPath, "taskWorkspace.RData")
     save(hubcollr, file=hubtask$workspaceImageFile)
     hubtask$contrastPlotOut
+    invisible(hubtask)
 }

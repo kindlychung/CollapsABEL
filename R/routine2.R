@@ -20,7 +20,7 @@ routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkAr
 
     taskName = sprintf("%s_s%d_p%.2e", pheno_name, nMaxShift, pFilter)
 
-    routine1(
+    hubtask = routine1(
         wDir = wDir,
         taskName = taskName,
         plinkArgs = plinkArgs,
@@ -29,4 +29,5 @@ routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkAr
         initGwas = initGwas,
         nMaxShift = nMaxShift
     )
+    invisible(hubtask)
 }
