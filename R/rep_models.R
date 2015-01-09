@@ -45,7 +45,7 @@ rep_dat = function(mat, snpdat, pheno_name, covar_names) {
         snp2 = gsub(":", "AAA", snpdat$snp2[i])
         snp2 = gsub("^(\\d+)", "C\\1", snp2)
         names(geno_mat) = gsub("^(\\d+)", "C\\1", names(geno_mat))
-        print(c(snp1, snp2))
+        # print(c(snp1, snp2))
         row_res = rep_models(mat, snp1, snp2, pheno_name, covar_names)
         res = rbind(res, row_res)
     }
