@@ -7,7 +7,7 @@ rep_models = function(mat, snp1, snp2, pheno_name, covar_names) {
     mod1 = summary(glm(as.formula(sprintf("%s ~ %s + %s", pheno_name, covars, snp1)), data=mat))
     mod2 = summary(glm(as.formula(sprintf("%s ~ %s + %s", pheno_name, covars, snp2)), data=mat))
     mod3 = summary(glm(as.formula(sprintf("%s ~ %s + colgen", pheno_name, covars)), data=mat))
-    n = length(covars) + 2
+    n = length(covar_names) + 2
     p1 = mod1$coefficients[n, 4]
     p2 = mod2$coefficients[n, 4]
     p3 = mod3$coefficients[n, 4]
