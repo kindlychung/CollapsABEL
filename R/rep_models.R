@@ -8,9 +8,25 @@ rep_models = function(mat, snp1, snp2, pheno_name, covar_names) {
     mod1 = summary(glm(as.formula(sprintf("%s ~ %s + %s", pheno_name, covars, snp1)), data=mat))
     mod2 = summary(glm(as.formula(sprintf("%s ~ %s + %s", pheno_name, covars, snp2)), data=mat))
     mod3 = summary(glm(as.formula(sprintf("%s ~ %s + colgen", pheno_name, covars)), data=mat))
-    p1 = mod1$coefficients[n, 4]
-    p2 = mod2$coefficients[n, 4]
-    p3 = mod3$coefficients[n, 4]
+
+    if(snp1 %in% mod1$coef) {
+        p1 = mod1$coefficients[n, 4]
+    } else {
+        p1 = NA
+    }
+
+    if(snp2 %in% mod2$coef) {
+        p2 = mod2$coefficients[n, 4]
+    } else {
+        p2 = NA
+    }
+
+    if("colgen" %in% mod3$coef) {
+        p3 = mod3$coefficients[n, 4]
+    } else {
+        p3 = NA
+    }
+
     res = data.frame(snp1=snp1, snp2=snp2, p1=p1, p2=p2, pcol=p3)
     mis = missing_dat(mat[, c(snp1, snp2)])
     names(mis) = c("mis1", "mis2")
