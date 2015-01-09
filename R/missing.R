@@ -1,7 +1,7 @@
 missing_snp = function(snp) {
     sum(is.na(snp)) / length(snp)
 }
-missing = function(geno_mat) {
+missing_dat = function(geno_mat) {
     as.data.frame(lapply(geno_mat, missing_snp))
 }
 maf_snp = function(snp) {

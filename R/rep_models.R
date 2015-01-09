@@ -12,7 +12,7 @@ rep_models = function(mat, snp1, snp2, pheno_name, covar_names) {
     p2 = mod2$coefficients[n, 4]
     p3 = mod3$coefficients[n, 4]
     res = data.frame(snp1=snp1, snp2=snp2, p1=p1, p2=p2, pcol=p3)
-    mis = missing(mat[, c(snp1, snp2)])
+    mis = missing_dat(mat[, c(snp1, snp2)])
     names(mis) = c("mis1", "mis2")
     maf_dat = maf(mat[, c(snp1, snp2)])
     names(maf_dat) = c("maf1", "maf2")
