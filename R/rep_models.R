@@ -8,19 +8,19 @@ rep_models = function(mat, snp1, snp2, pheno_name, covar_names) {
     mod2 = summary(glm(as.formula(sprintf("%s ~ %s + %s", pheno_name, covars, snp2)), data=mat))
     mod3 = summary(glm(as.formula(sprintf("%s ~ %s + colgen", pheno_name, covars)), data=mat))
 
-    if(snp1 %in% mod1$coef) {
+    if(snp1 %in% rownames(mod1$coef)) {
         p1 = mod1$coefficients[snp1, 4]
     } else {
         p1 = NA
     }
 
-    if(snp2 %in% mod2$coef) {
+    if(snp2 %in% rownames(mod2$coef)) {
         p2 = mod2$coefficients[snp2, 4]
     } else {
         p2 = NA
     }
 
-    if("colgen" %in% mod3$coef) {
+    if("colgen" %in% rownames(mod3$coef)) {
         p3 = mod3$coefficients["colgen", 4]
     } else {
         p3 = NA
