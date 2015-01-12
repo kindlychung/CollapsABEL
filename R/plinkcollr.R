@@ -674,7 +674,7 @@ plinkcollr = function(
         if(dbgtrigger()) cat("Return value from PLINK: ", ret, "\n")
         if(ret != 0) stop("PLINK failed.")
         nscanned = nscanned + 1
-        cat(sprintf("\rScanning shifted bed files %d/%d ...", nscanned, nfiles))
+        file.remove(sprintf("%s.bed", bedFile))
 	}
     cat("\n")
 }
