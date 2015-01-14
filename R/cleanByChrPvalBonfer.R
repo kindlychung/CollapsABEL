@@ -23,13 +23,13 @@ cleanByChrPvalsBonfer = function(
 
         # submatrix of chr, chr2, snp, snp2, bp, bp2, pvals
         # with minimal pvals less than threshold
-        extractChr = hub$chr[idx, ]
-        extractChr2 = hub$chr2[idx, ]
-        extractSnp = hub$snp[idx, ]
-        extractSnp2 = hub$snp2[idx, ]
-        extractBp = hub$bp[idx, ]
-        extractBp2 = hub$bp2[idx, ]
-        extractPvals = hub$pvals[idx, ]
+        extractChr = hub$chr[idx, ,     drop=FALSE]
+        extractChr2 = hub$chr2[idx, ,   drop=FALSE]
+        extractSnp = hub$snp[idx, ,     drop=FALSE]
+        extractSnp2 = hub$snp2[idx, ,   drop=FALSE]
+        extractBp = hub$bp[idx, ,       drop=FALSE]
+        extractBp2 = hub$bp2[idx, ,     drop=FALSE]
+        extractPvals = hub$pvals[idx, , drop=FALSE]
 
         # index of minal pvals
         minPvalIdx = apply(extractPvals, 1, which.min)
