@@ -97,6 +97,101 @@ hubtask = routine2(
     nMaxShift = 400
 )
 
+#############################
+## AK
+#############################
+require(collr2)
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "",
+    assoc=""
+)
+hubtask = routine2(
+    pheno = "RS123.1kg.pheno/dermatology.csv",
+    pheno_name = "AK",
+    covar_name = "sex,age",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    pFilter = 1e-1,
+    nMaxShift = 400
+)
+
+#############################
+## Sagging
+#############################
+require(collr2)
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "",
+    assoc=""
+)
+hubtask = routine2(
+    pheno = "RS123.1kg.pheno/dermatology.csv",
+    pheno_name = "Sagging",
+    covar_name = "sex,age",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    pFilter = 1e-1,
+    nMaxShift = 400
+)
+
+#############################
+## AK
+#############################
+require(collr2)
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    missing_phenotype = 9999,
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "",
+    missing_phenotype = 9999,
+    assoc=""
+)
+hubtask = routine2(
+    pheno = "RS123.1kg.pheno/dermatology_old_visits.csv",
+    pheno_name = "AK",
+    covar_name = "sex,age",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    pFilter = 1e-1,
+    nMaxShift = 400
+)
+
+require(collr2)
+setwd("/media/data1/kaiyin/RS123_1KG")
+plinkArgs = getPlinkParam(
+    allow_no_sex = "",
+    missing_phenotype = 9999,
+    pheno = "RS123.1kg.pheno/dermatology.csv",
+    pheno_name = "AK",
+    covar = "RS123.1kg.pheno/dermatology.csv",
+    covar_name = "sex,age,SC",
+    linear = "hide-covar"
+)
+initGwasArgs = getPlinkParam(
+    allow_no_sex = "", missing_phenotype = 9999,
+    pheno = "RS123.1kg.pheno/dermatology.csv",
+    pheno_name = "AK",
+    assoc = ""
+)
+crt1(
+    wDir = "/media/data1/kaiyin/RS123_1KG",
+    taskName = "AK_s200_p0.01",
+    plinkArgs = plinkArgs,
+    initGwasArgs = initGwasArgs,
+    initGwas = TRUE,
+    pFilter = 1e-2,
+    nMaxShift = 200
+)
+
 
 #############################
 ## sagging  test plink
