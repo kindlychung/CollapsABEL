@@ -6,5 +6,7 @@ relative_diff = function(x1, x2, sort_first=FALSE) {
   }
   dat = data.frame(x1=x1, x2=x2)
   dat = mice::cc(dat)
-  abs(dat$x1 - dat$x2) / pmax(abs(dat$x2), abs(dat$x1))
+  d = abs(dat$x1 - dat$x2)
+  p = pmax(dat$x2, dat$x1)
+  d/p
 }

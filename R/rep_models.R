@@ -45,7 +45,7 @@ rep_dat = function(mat, snpdat, pheno_name, covar_names) {
   for (i in 1:nrow(snpdat)) {
     snp1 = snpdat$snp[i]
     snp2 = snpdat$snp2[i]
-    print(c(snp1, snp2))
+    # print(c(snp1, snp2))
     row_res = rep_models(mat, snp1, snp2, pheno_name, covar_names)
     res = rbind(res, row_res)
   }
