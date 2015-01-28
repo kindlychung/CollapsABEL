@@ -18,7 +18,7 @@ routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkAr
         assoc = ""
     })
 
-    taskName = sprintf("%s_s%d_p%.2e", pheno_name, nMaxShift, pFilter)
+    taskName = sprintf("%s-%s_s%d_p%.2e", pheno_name, plinkArgs$covar_name, nMaxShift, pFilter)
 
     hubtask = routine1(
         wDir = wDir,
