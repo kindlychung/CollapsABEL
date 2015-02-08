@@ -1,3 +1,10 @@
+#' Shift bed files
+#' 
+#' This is a wrapper around the \code{bedcoll} commandline tool.
+#' 
+#' @param bfile bed filename, without the \code{.bed} extension.
+#' @param nshift_min Minimal shift number
+#' @param nshift_max Maximal shift number
 bedcollr = function(bfile=NULL, nshift_min=1, nshift_max=NULL) {
     checkFileExists(sprintf("%s.bed", bfile))
     message(sprintf("Shifting bed file: %s", bfile))

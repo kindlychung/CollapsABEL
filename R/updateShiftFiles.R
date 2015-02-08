@@ -1,3 +1,4 @@
+# update info on bed/bim/fam files in the working directory for QCDH data hub
 updateShiftFiles = function(hub) {
     hub$shiftFilesBed = sort(Sys.glob(sprintf("%s*.bed", hub$shiftStemCommon)))
     if(length(hub$shiftFilesBed) > 0) {

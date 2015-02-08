@@ -1,21 +1,10 @@
-# ## Genotype collapsing functions
-# These functions take a genotype matrix and generate a collapsed genotype matrix
-# by shifting. For example:
-# ```
-# a b c
-# d e f
-# g h i
-#
-# # Shift by 1
-# b c NA
-# e f NA
-# h i NA
-#
-# # Combine these two
-# a+b b+c NA
-# d+e e+f NA
-# g+h h+i NA
-# ```
+#' Genotype collapsing functions
+#' 
+#' See \url{https://gist.github.com/kindlychung/757f816f5b2f9e8d36b8#file-collapse-txt}
+#' 
+#' @param gen_mat Genotype matrix
+#' @param n_shit Shift number.
+#' @return A matrix of collapsed genotypes.
 collapse = function(gen_mat, n_shift) {
     # Shift the original genotype matrix, compensate the blank parts by NA
     na_cols = matrix(NA, nrow = nrow(gen_mat), ncol = n_shift)

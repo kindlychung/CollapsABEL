@@ -3,40 +3,31 @@
 \alias{collr2}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+An R package for quantitative CDH analysis
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+Compound Double Heterozygosity test (CDH) is a statistical test for detecting compound heterozygosity (as the name suggests).
+Quantitative CDH (qCDH) extends the method to support general linear models and functionally a superset of CDH. This package implements 
+qCDH in a user friendly and performant way.
 }
 \details{
 \tabular{ll}{
 Package: \tab collr2\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.2\cr
 Date: \tab 2014-10-26\cr
-License: \tab What license is it under?\cr
+License: \tab GPL \cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
 }
 \author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Kaiyin Zhong, Fan Liu
+Maintainer: Kaiyin Zhong <kindlychung@gmail.com>
 }
 \references{
-~~ Literature or other references for background information ~~
+To be updated.
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
-\keyword{ package }
+\keyword{ package, GWAS, qCDH, CDH, compound heterozygosity }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
 }

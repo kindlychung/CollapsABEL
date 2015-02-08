@@ -1,3 +1,8 @@
+#' Check whether a trait is binary
+#' 
+#' @param v A vector to be checked
+#' @param naVal A value for NA coding
+#' @return A string. "bin" for binary, or "con" for continuous.
 checkBinaryTrait = function(v, naVal="NA") {
     if(!is.numeric(v)) stop("Only numeric vectors are accepted.")
     vSet = unique(v)

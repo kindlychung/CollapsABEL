@@ -1,3 +1,13 @@
+#' Contrast QCDH p values with single-SNP p values
+#' 
+#' @param hub QCDH data hub
+#' @param chrfilter Numeric. A vector of chromosome numbers. If present, then only SNPs in these chromosomes are selected. Default to NULL.
+#' @param bplower Numeric. If present, then only SNPs with base position greater than it will selected. Default to NULL.
+#' @param bpupper Numeric. If present, then only SNPs with base position less than it will selected. Default to NULL.
+#' @param pvallower Numeric. If present, then only SNPs with p values higher than it will be plotted in the single-SNP part. Default to NULL.
+#' @param pvalupper Numeric. If present, then only SNPs with p values lower than it will be plotted in the single-SNP part. Default to NULL.
+#' @param bonferroni Logical. If present, then the QCDH p values will be adjusted by Bonferroni correction.  Default to NULL.
+#' @return A ggplot object of contrast Manhattan plot. (This plot is also stored in the QCDH data hub.)
 contrastPlot = function(hub, chrfilter=NULL, bplower=NULL, bpupper=NULL, pvallower=NULL, pvalupper=NULL, bonferroni=FALSE) {
     filter = rep(TRUE, hub$nsnp)
     filtered = FALSE

@@ -1,4 +1,11 @@
-gwas = function(pheno_mat, geno_mat, pheno_name, covar_names, ...) {
+#' A pure R implementation of GWAS 
+#' 
+#' @param pheno_mat Phenotype data frame
+#' @param geno_mat Genotype data frame
+#' @param pheno_name Name of phenotype
+#' @param covar_names Names of covariates
+#' @return A data frame with two columns, one for SNP names, one for p values.
+gwas = function(pheno_mat, geno_mat, pheno_name, covar_names) {
   # Join phenotype and genotype data
   # Each columns of geno_mat is an SNP
   # phe and geno_mat are expected to have same number of rows,
@@ -29,6 +36,6 @@ gwas = function(pheno_mat, geno_mat, pheno_name, covar_names, ...) {
     p
   }
   res = sapply(snps, getp)
-  plot(-log10(res))
+#   plot(-log10(res))
   res
 }

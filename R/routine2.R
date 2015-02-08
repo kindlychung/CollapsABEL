@@ -1,3 +1,20 @@
+#' QCDH routine 2
+#' 
+#' This routine generates arguments to be passed to PLINK and task name automatically, 
+#' then pass these to routine 1.
+#'
+#' @param wDir Working directory. All paths within this function will be relative to this.
+#' @param pheno Phenotype file (usually also containing covariates)
+#' @param pheno_name Name of phenotype in the phenotype file
+#' @param covar Covariates file, default to the same as \code{pheno}
+#' @param covar_name Name of covariates in the covariates file
+#' @param plinkArgs Arguments to be passed to PLINK (in QCDH analysis)
+#' @param initGwas Whether to perform an initial GWAS
+#' @param initGwasArgs Arguments to pass to PLINK for the initial GWAS
+#' @param pFilter Filter out SNPs with p value higher than this (in the initial GWAS)
+#' @param nMaxShift Maximum shift number (for genotype collapsing)
+#' @return hubtask An environment containing info and results from the current task.
+#' @export
 routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkArgs, initGwas=FALSE, initGwasArgs, pFilter, nMaxShift) {
     if(is.null(covar)) covar = pheno
     checkFileExists(c(wDir, pheno, covar))

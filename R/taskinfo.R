@@ -1,3 +1,13 @@
+#' Prepare paths and filenames for the task
+#' 
+#' A hepler function for sorting out folder and file names for plots, shifted bed files etc.
+#' It also figures out extension names of PLINK output.
+#' 
+#' @param hub Environment. QCDH data hub.
+#' @param taskName Character. Name of the task.
+#' @param plinkArgs List. Arguments to be passed to PLINK
+#' @param initGwasArgs List. Arguments to be passed to PLINK
+#' @param initGwas Logical. Whether to perform a initial GWAS.
 taskinfo = function(hub, taskName, plinkArgs, initGwasArgs, initGwas=FALSE) {
     hub[[taskName]] = new.env()
     hubtask = hub[[taskName]]

@@ -667,14 +667,14 @@ plinkcollr = function(
     nfiles = length(plinkcollFileStems)
     nscanned = 0
 	for(bedFile in plinkcollFileStems) {
-        message(sprintf("\nRunning plink on %s...", bedFile))
+        message(sprintf("Running plink on %s...", bedFile))
 		localParam = paramNameThenValue
 		localParam = c("--bfile", bedFile, "--out", bedFile, localParam)
         ret = system2("plink", localParam, wait=wait, stdout=NULL, stderr=NULL)
-        if(dbgtrigger()) cat("Return value from PLINK: ", ret, "\n")
+#         if(dbgtrigger()) cat("Return value from PLINK: ", ret, "\n")
         if(ret != 0) stop("PLINK failed.")
         nscanned = nscanned + 1
-        message(sprintf("\nRemoving %s...", bedFile))
+        message(sprintf("Removing %s...", bedFile))
         file.remove(sprintf("%s.bed", bedFile))
 	}
     cat("\n")

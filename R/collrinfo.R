@@ -1,3 +1,4 @@
+# collect info for genotype collapsing
 collrinfo = function(wDir=".") {
     hub = new.env()
     class(hub) = c(class(hub), "collrinfo")

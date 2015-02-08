@@ -1,3 +1,4 @@
+# Shuffle the lines of a whitespace delimited file
 shuffleLines = function(phenoFileOrig, phenoFile, shuffleVar) {
     tab = read.table(phenoFileOrig, head=TRUE)
     # print(head(tab, 10))

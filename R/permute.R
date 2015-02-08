@@ -1,3 +1,4 @@
+# permutation analysis
 permute = function(plinkArgs, initGwasArgs, phenoFileOrig, phenoFileShuffle = "~/Desktop/shuffle_pheno.csv", pFilter=0.05, wDir=".", n=100, nShiftMax=10) {
     setwd(wDir)
     globalMinVec = numeric(0)

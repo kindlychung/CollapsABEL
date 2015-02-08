@@ -1,3 +1,14 @@
+#' Prepare shifted bed files for current task.
+#' 
+#' Read p values from the initial GWAS, get a list of SNPs by the given p value threshold, 
+#' extract the genotypes of these SNPs and create a new bed file, then generate shifted bed files
+#' from this new bed file.
+#' 
+#' @param hub Environment. QCDH data hub.
+#' @param taskName Character. Name of the task.
+#' @param plinkOutFile Character. PLINK assoc file of the initial GWAS.
+#' @param pvalThresh Numeric. p value threshold for extraction of SNPs.
+#' 
 taskBedsPlinkOut = function(hub, taskName, plinkOutFile, pvalThresh=5e-2, nMinShift=1, nMaxShift) {
     hubtask = hub[[taskName]]
     hubtask$pvalThresh = pvalThresh

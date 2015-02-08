@@ -1,3 +1,7 @@
+#' Read a PLINK assoc file into a QCDH info hub
+#' 
+#' @param hub QCDH task info hub
+#' @param plinkOutFile PLINK assoc filename
 appendFromPlinkOut = function(hub, plinkOutFile) {
     coln = getNshiftStr(plinkOutFile)
     datshift = readplinkoutr(plinkOutFile)

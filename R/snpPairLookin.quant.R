@@ -1,17 +1,12 @@
-## require(ggplot2)
-## n_simu = 5000
-## g1 = sample(0:2, n_simu, replace = TRUE)
-## g2 = sample(0:2, n_simu, replace = TRUE)
-## g = paste(g1, g2, sep = "")
-## g = factor(g, levels = c("00", "10", "01", "20", "11", "02", "21", "12", "22"))
-## pheno = rnorm(n_simu)
-## dat = data.frame(geno=g, pheno=pheno)
-## ggplot(dat, aes(x = pheno)) + geom_density() + facet_grid(geno ~ .)
-## require(rbed2)
-## remove.packages("rbed2")
-## require(devtools)
-## install_bitbucket("kindlychung/rbed2")
-
+#' Look into a pairs of SNPs
+#' 
+#' Once your got a pair of SNPs that looks interesting from your GWAS, you can use this
+#' function to look into their relations with the (quantitative) phenotype.
+#' 
+#' @param g1 Numeric. A vector of genotypes for SNP 1
+#' @param g2 Numeric. A vector of genotypes for SNP 2
+#' @param pheno Numeric. A vector of phenotypes.
+#' @return A ggplot object.
 snpPairLookin.quant = function(g1, g2, pheno) {
     g = paste(g1, g2, sep = "")
     g = factor(g, levels = c("00", "10", "01", "20", "11", "02", "21", "12", "22"))

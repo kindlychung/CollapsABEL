@@ -1,3 +1,4 @@
+# create symlinks for bim and fam files.
 updateBimFam = function(hub) {
     # create symlinks for bim and fam files
     shift0BedFile = paste(hub$bedStem, "_shift_0000.bed", sep="")

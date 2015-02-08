@@ -1,3 +1,7 @@
+#' Read PLINK assoc files int matrices and store them in the QCDH data hub
+#' 
+#' @param hub QCDH data hub
+#' @param plinkOutExt Extension name of the PLINK output, e.g. ".assoc.linear"
 readcoll = function(hub, plinkOutExt) {
     if(missing(plinkOutExt)) {
         if(is.null(hub$plinkOutExt)) {

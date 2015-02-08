@@ -1,3 +1,12 @@
+#' Collect info on shifted bed files
+#' 
+#' Collect info on shifted bed files, generate symlinks to bim and fam files, and put these info 
+#' in the QCDH task info hub.
+#' 
+#' @param hub QCDH task info hub.
+#' @param genbed Logical. Whether to generate shifted bed files.
+#' @param nShiftMin Minimal shift number (only relevant when \code{genbed} is true).
+#' @param nShiftMax Maximal shift number (only relevant when \code{genbed} is true).
 bedcollinfo = function(hub, genbed=FALSE, nShiftMin = 1, nShiftMax = 5) {
     if(!is(hub, "collrinfo")) stop("bedcollinfo processes output from collrinfo!")
     if(genbed) {

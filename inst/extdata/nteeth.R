@@ -1,5 +1,0 @@
-require(collr)
-setwd("/media/data1/kaiyin/nteeth/")
-plinkParamList = getPlinkParam( allow_no_sex = "", pheno = "nteeth.phe", covar = "", covar_name = "Sex,AgeImp", linear = "hide-covar", pheno_name = "Nteeth")
-initPlinkArgs = getPlinkParam(maf = 0.01, hwe = 1e-4, geno=0.02)
-taskRoutine( taskname="nteeth_s50", plinkParamList=plinkParamList, nMaxShift=50, pvalThresh=1e-3, initPlinkArgs = initPlinkArgs)

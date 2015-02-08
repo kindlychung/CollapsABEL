@@ -1,3 +1,10 @@
+#' Extract relevant SNP out of the QCDH data hub
+#' 
+#' @param hub QCDH data hub
+#' @param threshold Numeric. Upper bound for minimal p value.
+#' @param lowerPbonfer Logical. When this is set to TRUE, it requires that Bonferroni-corrected minimal P should be lower than p value of either of the paired SNPs. Default to FALSE.
+#' @param forceRecalc Logical. When this is set to FALSE, this function will just return the cached info from \code{hub}. Default to TRUE.
+#' @return A data frame with info on all pairs of SNPs satisfying the aforementioned criteria.
 cleanByChrPvalsBonfer = function(
                                  hub,
                                  threshold=5e-8,
