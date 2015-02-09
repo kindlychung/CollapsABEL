@@ -6,12 +6,14 @@ if [[ $(uname -a) == *"Ubuntu"* ]]; then
     sudo apt-get -y install libcurl4-gnutls-dev
     sudo apt-get -y install \
         r-base git \
+        libboost-dev \
         libboost-system-dev libboost-filesystem-dev libboost-program-options-dev \
         libarpack2-dev liblapack-dev libatlas-dev libopenblas-dev \
         cmake
 elif [[ $(ls /etc/*-release) == *"fedora-release"*  ]]; then
     sudo yum -y install \
         R git libcurl libcurl-devel \
+        boost-devel \
         boost-system boost-filesystem boost-program-options \
         lapack arpack atlas openblas \
         lapack-devel arpack-devel atlas-devel openblas-devel \
