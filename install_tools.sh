@@ -39,6 +39,8 @@ cd armadillo-4.600.4/
 cmake .
 make
 sudo make install
+cd /tmp
+rm -rf armadillo-4.600.4/
 
 # install bedcoll
 cd /tmp
@@ -46,5 +48,7 @@ git clone https://kindlychung@bitbucket.org/kindlychung/bedcoll.git
 cd bedcoll/
 ./build.sh
 sudo cp bedcoll /usr/local/bin/
+cd /tmp
+rm -rf bedcoll
 
 
