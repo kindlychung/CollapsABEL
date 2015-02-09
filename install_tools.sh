@@ -40,7 +40,7 @@ cmake .
 make
 sudo make install
 cd /tmp
-rm -rf armadillo-4.600.4/
+rm -rf armadillo-4.600.4*
 
 # install bedcoll
 cd /tmp
@@ -49,6 +49,6 @@ cd bedcoll/
 ./build.sh
 sudo cp bedcoll /usr/local/bin/
 cd /tmp
-rm -rf bedcoll
+rm -rf bedcoll*
 
 
