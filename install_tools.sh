@@ -18,7 +18,7 @@ elif [[ $(ls /etc/*-release) == *"fedora-release"*  ]]; then
         cmake
 elif [[ $(ls /etc/*-release) == *"SuSE-release"*  ]]; then
     sudo zypper -n install \
-        R-base libcurl4 libcurl-devel git \
+        R-base libcurl4 libcurl-devel git gcc-c++ \
         libboost_system* libboost_filesystem* libboost_program_options* \
         liblapack* lapack-devel \
         libarpack* arpack-ng-devel \
