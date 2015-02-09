@@ -2,9 +2,10 @@
 
 # install required packages
 if [[ $(uname -a) == *"Ubuntu"* ]]; then
-    sudo apt-get -y build-dep libcurl4-gnutls-dev
-    sudo apt-get -y install libcurl4-gnutls-dev
-    sudo apt-get -y install \
+    export DEBIAN_FRONTEND=noninteractive
+    sudo apt-get -q -y build-dep libcurl4-gnutls-dev
+    sudo apt-get -q -y install libcurl4-gnutls-dev
+    sudo apt-get -q -y install \
         r-base git \
         libboost-dev \
         libboost-system-dev libboost-filesystem-dev libboost-program-options-dev \
