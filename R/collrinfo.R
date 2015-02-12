@@ -4,7 +4,7 @@ collrinfo = function(wDir=".") {
     class(hub) = c(class(hub), "collrinfo")
     hub$wDir = wDir
     hub$tmpdir = homeTmpDir()
-    hub$fullGwasDir = file.path(wDir, "collr_full_gwas")
+    hub$fullGwasDir = file.path(wDir, "full_gwas")
     if(!file.exists(hub$fullGwasDir)) dir.create(hub$fullGwasDir)
     rootAllBedFiles = Sys.glob(file.path(wDir, "*.bed"))
     shiftIdx = grepl("_shift_", rootAllBedFiles)
@@ -45,7 +45,7 @@ collrinfo = function(wDir=".") {
     if(!all(file.exists(hub$mainPlinkFiles))) {
         print(hub$mainPlinkFiles)
         stop("One or more of the above files are missing!")
-    }     
+    }
 
     hub$shiftStemCommon = sprintf("%s_shift_", hub$bedStem)
 

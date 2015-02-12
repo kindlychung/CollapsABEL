@@ -1,8 +1,8 @@
 #' Prepare paths and filenames for the task
-#' 
+#'
 #' A hepler function for sorting out folder and file names for plots, shifted bed files etc.
 #' It also figures out extension names of PLINK output.
-#' 
+#'
 #' @param hub Environment. QCDH data hub.
 #' @param taskName Character. Name of the task.
 #' @param plinkArgs List. Arguments to be passed to PLINK
@@ -15,8 +15,8 @@ taskinfo = function(hub, taskName, plinkArgs, initGwasArgs, initGwas=FALSE) {
     hubtask$plinkArgs = plinkArgs
     hubtask$initGwasArgs = initGwasArgs
 
-    hubtask$taskPath = file.path(hub$wDir, sprintf("collr_task_%s", taskName))
-    hubtask$taskPlotPath = file.path(hubtask$taskPath, "collr_plots")
+    hubtask$taskPath = file.path(hub$wDir, sprintf("task_%s", taskName))
+    hubtask$taskPlotPath = file.path(hubtask$taskPath, "plots")
     if(file.exists(hubtask$taskPath)) unlink(hubtask$taskPath, recursive=TRUE, force=TRUE)
     if(file.exists(hubtask$taskPlotPath)) unlink(hubtask$taskPlotPath, recursive=TRUE, force=TRUE)
     dir.create(hubtask$taskPath)

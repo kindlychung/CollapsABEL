@@ -1,6 +1,6 @@
 #' QCDH routine 2
-#' 
-#' This routine generates arguments to be passed to PLINK and task name automatically, 
+#'
+#' This routine generates arguments to be passed to PLINK and task name automatically,
 #' then pass these to routine 1.
 #'
 #' @param wDir Working directory. All paths within this function will be relative to this.
@@ -15,7 +15,7 @@
 #' @param nMaxShift Maximum shift number (for genotype collapsing)
 #' @return hubtask An environment containing info and results from the current task.
 #' @export
-routine2 = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkArgs, initGwas=FALSE, initGwasArgs, pFilter, nMaxShift) {
+qcdhRoutine = function(wDir=".", pheno, pheno_name, covar=NULL, covar_name, plinkArgs, initGwas=FALSE, initGwasArgs, pFilter, nMaxShift) {
     if(is.null(covar)) covar = pheno
     checkFileExists(c(wDir, pheno, covar))
     if(!is.character(c(pheno_name, covar_name))) {
