@@ -1,8 +1,9 @@
 #' Read PLINK assoc files int matrices and store them in the QCDH data hub
-#' 
+#'
 #' @param hub QCDH data hub
 #' @param plinkOutExt Extension name of the PLINK output, e.g. ".assoc.linear"
-readcoll = function(hub, plinkOutExt) {
+#' @param bpdiff Upper bound of distance between a pair of SNPs, default to 5e5
+readcoll = function(hub, plinkOutExt, bpdiff = 5e5) {
     if(missing(plinkOutExt)) {
         if(is.null(hub$plinkOutExt)) {
             stop("plinkOutExt is not provided and also not inferred in the hub.")
@@ -48,11 +49,17 @@ readcoll = function(hub, plinkOutExt) {
         appendFromPlinkOut(hub, plinkOutFile)
     }
     updateSnp2Info(hub)
-    updateMinPvals(hub)
+    updateMinPvals(hub, bpdiff = bpdiff)
 
     invisible(NULL)
 }
 
-readcoll.task = function(hub, taskName, plinkOutExt) {
-    readcoll(hub[[taskName]])
+#' A wrapper of \code{readcoll}
+#'
+#' @param hub QCDH data hub
+#' @param taskName name of the task
+#' @param plinkOutExt Extension name of the PLINK output, e.g. ".assoc.linear"
+#' @param bpdiff Upper bound of distance between a pair of SNPs, default to 5e5
+readcoll.task = function(hub, taskName, plinkOutExt, bpdiff = 5e5) {
+    readcoll(hub[[taskName]], bpdiff = bpdiff)
 }

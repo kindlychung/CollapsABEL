@@ -13,8 +13,9 @@
 #' @param initGwasArgs Arguments to pass to PLINK for the initial GWAS
 #' @param pFilter Filter out SNPs with p value higher than this (in the initial GWAS)
 #' @param nMaxShift Maximum shift number (for genotype collapsing)
+#' @param bpdiff Upper bound of distance between a pair of SNPs, default to 5e5
 #' @return hubtask An environment containing info and results from the current task.
-routine1 = function(wDir=".", taskName, plinkArgs, initGwas=FALSE, initGwasArgs, pFilter=.05, nMaxShift) {
+routine1 = function(wDir = ".", taskName, plinkArgs, initGwas=FALSE, initGwasArgs, pFilter=.05, nMaxShift, bpdiff = 5e5) {
     setwd(wDir)
     # collect info
     hubcollr = collrinfo()
@@ -25,7 +26,7 @@ routine1 = function(wDir=".", taskName, plinkArgs, initGwas=FALSE, initGwasArgs,
 
     taskBedsPlinkOut(hubcollr, taskName, hubtask$fullGwasOut, pFilter, 1, nMaxShift)
     taskAnalyze(hubcollr, taskName)
-    readcoll.task(hubcollr, taskName)
+    readcoll.task(hubcollr, taskName, bpdiff = bpdiff)
     contrastPlot(hubtask)
     hubtask$taskContrastPlotFile = file.path(hubtask$taskPlotPath, "contrastPlot.png")
     ggsave(plot = hubtask$contrastPlotOut, filename = hubtask$taskContrastPlotFile, width=10, height=5)
