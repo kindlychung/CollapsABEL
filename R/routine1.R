@@ -1,10 +1,10 @@
 #' QCDH routine 1
-#' 
-#' This routine collects info on the working directory, performs an 
+#'
+#' This routine collects info on the working directory, performs an
 #' initial GWAS as a basis for SNP selection by p values, generates
 #' bed files with collapsed genotypes, analyzes them, and saves intermediate
 #' and final results in an environment named after the task.
-#' This routine is called by \code{routine2}.
+#' This routine is called by \code{qcdhRoutine}.
 #'
 #' @param wDir Working directory. All paths within this function will be relative to this.
 #' @param taskName Name of the QCDH task.
